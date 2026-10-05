@@ -1,0 +1,9 @@
+# Keep line endings LF everywhere. These files are served as-is by a static
+# host, and a CRLF round-trip through a Windows checkout would churn the diff
+# of every file for no reason.
+* text=auto eol=lf
+
+*.png binary
+*.webp binary
+*.jpg binary
+*.woff2 binary

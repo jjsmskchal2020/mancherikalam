@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-labelledby="t">
+  <title id="t">Big Bazaar</title>
+  <defs>
+    <pattern id="stripe" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="22" height="22" fill="none"/>
+      <rect width="11" height="22" fill="#b8470d" opacity=".055"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="600" fill="#fbf7f0"/>
+  <rect width="800" height="600" fill="#b8470d" opacity=".07"/>
+  <rect width="800" height="600" fill="url(#stripe)"/>
+  <rect x="6" y="6" width="788" height="588" fill="none" stroke="#b8470d" stroke-width="2" stroke-dasharray="10 8" opacity=".38" rx="10"/>
+  <g transform="translate(400.0 264.0) scale(2.727) translate(-60 -60)">
+    <g fill="none" stroke="#b8470d" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity=".85"><path d="M16 62h40v36H16zM64 62h40v36H64zM40 20h40v36H40z"/><path d="M16 76h40M64 76h40M40 34h40"/></g>
+  </g>
+  <text x="400.0" y="468.0" text-anchor="middle" fill="#8f3609" font-family="Nunito Sans, Segoe UI, Helvetica, Arial, sans-serif" font-size="45.0" font-weight="700" letter-spacing=".5">Big Bazaar</text>
+  <text x="400.0" y="516.0" text-anchor="middle" fill="#8f3609" opacity=".7" font-family="Nunito Sans, Segoe UI, Helvetica, Arial, sans-serif" font-size="25.2" font-weight="600" letter-spacing="1.2">PLACEHOLDER PHOTO · 800 × 600</text>
+</svg>

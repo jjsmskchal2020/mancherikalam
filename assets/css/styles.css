@@ -1,0 +1,1211 @@
+@charset "UTF-8";
+
+/* ============================================================
+   Mancherikalam — two family shops, Karukachal, Kottayam
+   Direction: a warm paper shopfront. Generous tap targets,
+   bilingual by default, readable on a cheap phone in sunlight.
+
+   One stylesheet themes every page. The accent comes from
+   data-shop on <html>; the bilingual layout comes from
+   data-lang on <html>. No page-specific CSS anywhere.
+   ============================================================ */
+
+/* ---- base tokens ---- */
+
+:root {
+  --bg: #fbf7f0;
+  --bg-soft: #f6efe4;
+  --surface: #ffffff;
+  --surface-2: #f4ece0;
+  --line: #e4d8c6;
+  --line-soft: #efe6d8;
+
+  --text: #2a2118;
+  --text-dim: #5d5247;
+  --muted: #756859;
+
+  --on-accent: #ffffff;
+  --whatsapp: #1fa855;
+
+  --radius: 12px;
+  --radius-lg: 20px;
+  --shell: 1120px;
+  --tap: 48px;
+  --header-h: 60px;
+
+  --sans: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    system-ui, sans-serif;
+  --ml: "Noto Sans Malayalam", "Nirmala UI", Manjari, Meera, AnjaliOldLipi,
+    sans-serif;
+
+  /* Malayalam needs more room: stacked vowel signs and conjunct
+     clusters sit above and below the baseline. */
+  --ml-size-adj: 1.06;
+  --ml-line: 1.85;
+
+  --shadow: 0 1px 2px rgba(42, 33, 24, .06), 0 6px 18px rgba(42, 33, 24, .07);
+  --shadow-lift: 0 2px 4px rgba(42, 33, 24, .08), 0 14px 32px rgba(42, 33, 24, .12);
+}
+
+/* Per-shop accents. Every pair is contrast-checked against --bg
+   and against --on-accent at WCAG AA for normal-size text. */
+
+[data-shop="family"] {
+  --accent: #7a3b26;         /* 7.93:1 on --bg */
+  --accent-strong: #5d2c1c;
+  --accent-wash: #f3e7e0;
+  --accent-ring: #a65a3d;
+}
+
+[data-shop="supermarket"] {
+  --accent: #2f7d32;         /* 4.80:1 on --bg, 5.12:1 under white */
+  --accent-strong: #1f5e24;
+  --accent-wash: #e8f1e6;
+  --accent-ring: #3f9c43;
+}
+
+[data-shop="big-bazaar"] {
+  --accent: #b8470d;         /* 4.98:1 on --bg, 5.32:1 under white */
+  --accent-strong: #8f3609;
+  --accent-wash: #f8e9df;
+  --accent-ring: #d4650f;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #171310;
+    --bg-soft: #1d1814;
+    --surface: #211c17;
+    --surface-2: #2a231d;
+    --line: #3a3129;
+    --line-soft: #2d2620;
+
+    --text: #f2ebe1;
+    --text-dim: #c0b4a5;
+    --muted: #9a8d7e;
+
+    /* In dark mode the accent is a light colour, so ink on top of it
+       flips to the page ground instead of white. */
+    --on-accent: #171310;
+    --whatsapp: #4ddd8a;
+
+    --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 6px 18px rgba(0, 0, 0, .45);
+    --shadow-lift: 0 2px 4px rgba(0, 0, 0, .45), 0 14px 32px rgba(0, 0, 0, .55);
+  }
+
+  [data-shop="family"] {
+    --accent: #d98d6a;       /* 7.01:1 on --bg */
+    --accent-strong: #eda986;
+    --accent-wash: #2a1f19;
+    --accent-ring: #d98d6a;
+  }
+
+  [data-shop="supermarket"] {
+    --accent: #6cc46f;       /* 8.58:1 on --bg */
+    --accent-strong: #8ad88c;
+    --accent-wash: #1a241b;
+    --accent-ring: #6cc46f;
+  }
+
+  [data-shop="big-bazaar"] {
+    --accent: #ff8a3d;       /* 7.87:1 on --bg */
+    --accent-strong: #ffa366;
+    --accent-wash: #2a1c12;
+    --accent-ring: #ff8a3d;
+  }
+}
+
+/* ---- reset ---- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Keep anchor targets clear of the sticky header. */
+  scroll-padding-top: calc(var(--header-h) + 12px);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  /* Long Malayalam compounds must never push the page sideways. */
+  overflow-wrap: break-word;
+}
+
+img,
+svg,
+iframe {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: .08em;
+  text-underline-offset: .18em;
+}
+
+a:hover {
+  color: var(--accent-strong);
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.25;
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -.01em;
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+/* ---- focus ---- */
+
+:focus-visible {
+  outline: 3px solid var(--accent-ring);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+}
+
+.skip:focus {
+  left: 8px;
+  top: 8px;
+  z-index: 60;
+  padding: .7rem 1rem;
+  background: var(--accent);
+  color: var(--on-accent);
+  border-radius: var(--radius);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================================
+   Bilingual pairs
+
+   Markup is always English-then-Malayalam so the page reads
+   correctly with CSS and JS switched off. data-lang only
+   reorders and resizes — nothing is ever hidden.
+   ============================================================ */
+
+.bi {
+  display: flex;
+  flex-direction: column;
+  gap: .18em;
+}
+
+.bi > * {
+  margin: 0;
+  min-width: 0;
+}
+
+.bi-ml {
+  font-family: var(--ml);
+  line-height: var(--ml-line);
+  /* Only the 400 weight of Noto Sans Malayalam is loaded. Inheriting 700
+     from a heading would make the browser synthesise bold, which smears
+     the script's conjuncts and vowel signs. */
+  font-weight: 400;
+}
+
+/* English leads (default) */
+
+[data-lang="en"] .bi-en {
+  order: 1;
+}
+
+[data-lang="en"] .bi-ml {
+  order: 2;
+  font-size: .76em;
+  font-weight: 400;
+  color: var(--text-dim);
+}
+
+/* Malayalam leads */
+
+[data-lang="ml"] .bi-ml {
+  order: 1;
+  font-size: calc(1em * var(--ml-size-adj));
+  font-weight: 400;
+  color: inherit;
+}
+
+[data-lang="ml"] .bi-en {
+  order: 2;
+  font-size: .76em;
+  font-weight: 400;
+  color: var(--text-dim);
+}
+
+/* Paragraph pairs need real spacing between the two blocks. */
+
+.bi--prose {
+  gap: .85rem;
+}
+
+[data-lang="en"] .bi--prose .bi-ml,
+[data-lang="ml"] .bi--prose .bi-en {
+  font-size: .95em;
+  font-weight: 400;
+  padding-left: .9rem;
+  border-left: 3px solid var(--line);
+}
+
+/* Inside a filled button the secondary line must stay legible,
+   so it keeps the button's own ink rather than --text-dim. */
+
+[data-lang="en"] .btn .bi-ml,
+[data-lang="ml"] .btn .bi-en {
+  color: inherit;
+  opacity: .82;
+}
+
+/* ---- layout ---- */
+
+.shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: 1.15rem;
+}
+
+.section {
+  padding-block: 3rem;
+}
+
+.section--wash {
+  background: var(--accent-wash);
+}
+
+.section--soft {
+  background: var(--bg-soft);
+}
+
+/* --accent is tuned for contrast against --bg and against --on-accent. On
+   --accent-wash it lands at 4.43:1 for the supermarket green, just under
+   AA, so accent-coloured TEXT on a wash uses the darker --accent-strong.
+   Icons and borders on a wash are non-text and keep --accent. */
+
+.section--wash .eyebrow {
+  color: var(--accent-strong);
+}
+
+.section-head {
+  margin-bottom: 1.75rem;
+}
+
+.section-head h2 {
+  font-size: clamp(1.45rem, 5.5vw, 2rem);
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: .5rem;
+  font-size: .76rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ---- header ---- */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  min-height: var(--header-h);
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .45rem 1.15rem;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 1px 0 var(--line-soft);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  min-width: 0;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: clamp(.98rem, 4vw, 1.12rem);
+  letter-spacing: -.015em;
+}
+
+.brand img {
+  width: 30px;
+  height: 30px;
+  flex: none;
+  border-radius: 50%;
+}
+
+.brand-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.brand-sub {
+  display: block;
+  font-size: .68em;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: .02em;
+  line-height: 1.2;
+}
+
+.topbar-end {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin-left: auto;
+}
+
+/* ---- language toggle ---- */
+
+.lang {
+  display: flex;
+  flex: none;
+  padding: 3px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+
+.lang-btn {
+  min-height: 36px;
+  padding: 0 .7rem;
+  background: none;
+  border: 0;
+  border-radius: 999px;
+  font-size: .82rem;
+  font-weight: 700;
+  color: var(--text-dim);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.lang-btn[lang="ml"] {
+  font-family: var(--ml);
+  font-size: .78rem;
+}
+
+.lang-btn[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+/* ---- nav ---- */
+
+.nav-toggle {
+  display: grid;
+  place-content: center;
+  gap: 4px;
+  width: var(--tap);
+  height: var(--tap);
+  flex: none;
+  padding: 0;
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+}
+
+.nav {
+  position: fixed;
+  top: var(--header-h);
+  left: 0;
+  right: 0;
+  z-index: 39;
+  display: none;
+  flex-direction: column;
+  padding: .5rem 1.15rem 1rem;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.nav.is-open {
+  display: flex;
+}
+
+.nav a {
+  display: flex;
+  align-items: center;
+  min-height: var(--tap);
+  padding: .4rem .2rem;
+  border-bottom: 1px solid var(--line-soft);
+  color: var(--text);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.nav a:last-child {
+  border-bottom: 0;
+}
+
+.nav a:hover {
+  color: var(--accent);
+}
+
+/* ---- buttons ---- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+  min-height: var(--tap);
+  padding: .7rem 1.25rem;
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .12s ease, background-color .12s ease;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn svg {
+  flex: none;
+  width: 22px;
+  height: 22px;
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.btn--primary:hover {
+  background: var(--accent-strong);
+  color: var(--on-accent);
+}
+
+.btn--ghost {
+  background: var(--surface);
+  border-color: var(--line);
+  color: var(--text);
+}
+
+.btn--ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+.btn-stack {
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+  margin-top: 1.5rem;
+}
+
+/* A control whose underlying value in window.PAGE is still a [PLACEHOLDER]
+   is flagged by main.js rather than left to produce a dead tap. All of this
+   disappears by itself the moment the real numbers and URLs are filled in. */
+
+[data-placeholder] {
+  border-style: dashed !important;
+  border-color: var(--accent) !important;
+  background: var(--accent-wash) !important;
+  color: var(--accent-strong) !important;
+  cursor: not-allowed;
+}
+
+[data-placeholder]::after {
+  content: " — number not added yet";
+  font-size: .78em;
+  font-weight: 700;
+  opacity: .85;
+}
+
+.map-load[data-placeholder]::after {
+  content: " — map link not added yet";
+}
+
+/* The sticky bar is two buttons across a 375px phone, with no room for the
+   explanation; the same warning is already on the hero CTA above. */
+
+.actionbar [data-placeholder]::after {
+  content: none;
+}
+
+/* ---- hero ---- */
+
+.hero {
+  padding-block: 1.75rem 2.5rem;
+}
+
+.hero-media {
+  margin-bottom: 1.5rem;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.hero-media img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.hero h1 {
+  font-size: clamp(1.8rem, 7.5vw, 3rem);
+}
+
+.hero-tagline {
+  margin-top: .9rem;
+  font-size: clamp(1.02rem, 4.2vw, 1.2rem);
+  color: var(--text-dim);
+  font-weight: 400;
+}
+
+.hero-aside {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem 1.4rem;
+  margin-top: 1.25rem;
+  font-weight: 700;
+}
+
+.hero-aside a {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  min-height: 44px;
+  text-decoration: none;
+}
+
+.hero-aside a:hover {
+  text-decoration: underline;
+}
+
+/* ---- landing: shop chooser ---- */
+
+.chooser {
+  display: grid;
+  gap: 1.5rem;
+  padding-block: 2rem 3rem;
+}
+
+.shop-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.shop-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lift);
+}
+
+/* Each card carries its own shop's accent on the family-themed page. */
+
+.shop-card--supermarket {
+  --accent: #2f7d32;
+  --accent-strong: #1f5e24;
+  --accent-wash: #e8f1e6;
+  --accent-ring: #3f9c43;
+}
+
+.shop-card--big-bazaar {
+  --accent: #b8470d;
+  --accent-strong: #8f3609;
+  --accent-wash: #f8e9df;
+  --accent-ring: #d4650f;
+}
+
+@media (prefers-color-scheme: dark) {
+  .shop-card--supermarket {
+    --accent: #6cc46f;
+    --accent-strong: #8ad88c;
+    --accent-wash: #1a241b;
+    --accent-ring: #6cc46f;
+  }
+
+  .shop-card--big-bazaar {
+    --accent: #ff8a3d;
+    --accent-strong: #ffa366;
+    --accent-wash: #2a1c12;
+    --accent-ring: #ff8a3d;
+  }
+}
+
+.shop-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-bottom: 4px solid var(--accent);
+}
+
+.shop-card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: .9rem;
+  padding: 1.4rem 1.25rem 1.5rem;
+}
+
+.shop-card h2 {
+  font-size: clamp(1.3rem, 5vw, 1.6rem);
+}
+
+.shop-card p {
+  color: var(--text-dim);
+}
+
+.shop-card .btn {
+  margin-top: auto;
+}
+
+/* ---- category grid ---- */
+
+.cats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .85rem;
+}
+
+.cat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .6rem;
+  min-width: 0;
+  padding: 1.15rem .75rem;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.cat-icon {
+  display: grid;
+  place-content: center;
+  width: 52px;
+  height: 52px;
+  flex: none;
+  background: var(--accent-wash);
+  border-radius: 50%;
+  color: var(--accent);
+}
+
+.cat-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.cat .bi {
+  align-items: center;
+  font-size: .95rem;
+  font-weight: 700;
+}
+
+/* ---- for businesses ---- */
+
+.biz {
+  padding: 1.6rem 1.25rem;
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-lg);
+}
+
+.biz h2 {
+  font-size: clamp(1.3rem, 5vw, 1.7rem);
+}
+
+.biz-lead {
+  margin-top: 1rem;
+  color: var(--text-dim);
+}
+
+.biz-list {
+  display: grid;
+  gap: .5rem;
+  margin: 1.2rem 0 0;
+}
+
+.biz-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: .6rem;
+  font-weight: 400;
+}
+
+.biz-list li::before {
+  content: "\2713";
+  flex: none;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ---- visit us ---- */
+
+.visit {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.visit-block + .visit-block {
+  margin-top: 1.5rem;
+}
+
+.visit h3 {
+  font-size: 1.05rem;
+  margin-bottom: .5rem;
+}
+
+.address {
+  font-style: normal;
+  color: var(--text-dim);
+}
+
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .95rem;
+}
+
+caption {
+  padding: .75rem 1rem;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--line);
+  font-weight: 700;
+  text-align: left;
+}
+
+th,
+td {
+  padding: .7rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+tbody tr:last-child th,
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+th {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+td {
+  color: var(--text-dim);
+}
+
+/* ---- map (click to load) ---- */
+
+.map {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.map iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.map-load {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  width: 100%;
+  padding: 1rem;
+  background: var(--accent-wash);
+  border: 0;
+  color: var(--accent-strong);
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+}
+
+.map-load svg {
+  width: 38px;
+  height: 38px;
+}
+
+.map-load small {
+  font-weight: 400;
+  color: var(--text-dim);
+}
+
+/* ---- footer ---- */
+
+.site-footer {
+  padding-block: 2.5rem;
+  background: var(--bg-soft);
+  border-top: 1px solid var(--line);
+}
+
+.footer-grid {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.footer-col h2 {
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: .75rem;
+}
+
+.footer-links {
+  display: grid;
+  gap: .15rem;
+}
+
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  min-height: 44px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.legal {
+  display: grid;
+  gap: .3rem;
+  font-size: .9rem;
+  color: var(--text-dim);
+}
+
+.legal dt {
+  font-weight: 700;
+  color: var(--muted);
+  font-size: .76rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.legal dd {
+  margin: 0 0 .6rem;
+}
+
+.copyright {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+  font-size: .88rem;
+  color: var(--muted);
+}
+
+/* ---- sticky action bar (mobile) ---- */
+
+.actionbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 45;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .5rem;
+  padding: .5rem .75rem calc(.5rem + env(safe-area-inset-bottom, 0px));
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+  box-shadow: 0 -4px 18px rgba(42, 33, 24, .1);
+}
+
+.actionbar .btn {
+  min-height: 46px;
+  padding-inline: .5rem;
+  font-size: .95rem;
+}
+
+.has-actionbar {
+  /* Keep the bar from covering the last of the footer. */
+  padding-bottom: calc(var(--tap) + 2.25rem);
+}
+
+/* ---- 404 ---- */
+
+.notfound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  min-height: 70vh;
+  padding: 2rem 1.15rem;
+  text-align: center;
+}
+
+.notfound h1 {
+  font-size: clamp(2rem, 9vw, 3.25rem);
+}
+
+/* ============================================================
+   Wider screens
+   ============================================================ */
+
+@media (min-width: 600px) {
+  .cats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .btn-stack {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .btn-stack .btn {
+    flex: 1 1 15rem;
+  }
+
+  .chooser {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  :root {
+    --header-h: 68px;
+  }
+
+  body {
+    font-size: 17.5px;
+  }
+
+  .section {
+    padding-block: 4.5rem;
+  }
+
+  .cats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .visit {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    align-items: start;
+    gap: 2.5rem;
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .hero {
+    padding-block: 3rem 4rem;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .hero-media {
+    order: 2;
+    margin-bottom: 0;
+  }
+
+  .hero-text {
+    order: 1;
+  }
+
+  .biz {
+    padding: 2.5rem 2.25rem;
+  }
+
+  .chooser {
+    gap: 2rem;
+    padding-block: 3rem 4.5rem;
+  }
+}
+
+/* Above the mobile breakpoint the sticky bar is unnecessary —
+   the header CTA and the hero buttons are both in reach. */
+
+@media (min-width: 721px) {
+  .actionbar {
+    display: none;
+  }
+
+  .has-actionbar {
+    padding-bottom: 0;
+  }
+}
+
+/* The hamburger only exists while the nav is collapsed. */
+
+@media (min-width: 721px) {
+  .nav-toggle {
+    display: none;
+  }
+
+  /* In the DOM the nav follows .topbar-end so the mobile drawer can sit
+     below the whole bar. On desktop they swap, putting the section links
+     next to the brand and the language pill out at the right edge. */
+
+  .nav {
+    order: 2;
+    margin-left: auto;
+    position: static;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: .35rem;
+    padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .topbar-end {
+    order: 3;
+    margin-left: .75rem;
+  }
+
+  .nav a {
+    min-height: 40px;
+    padding: .35rem .7rem;
+    border-bottom: 0;
+    border-radius: var(--radius);
+    font-size: .95rem;
+  }
+
+  .nav a:hover {
+    background: var(--accent-wash);
+  }
+
+  .nav .btn {
+    min-height: 42px;
+    margin-left: .35rem;
+  }
+}
+
+/* ---- motion ---- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* ---- print ---- */
+
+@media print {
+  .topbar,
+  .nav,
+  .actionbar,
+  .map,
+  .skip {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+}

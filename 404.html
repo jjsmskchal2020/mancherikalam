@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" data-shop="family">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Page not found — Mancherikalam</title>
+  <meta name="description"
+    content="That page does not exist. Find Mancherikalam Supermarket and Mancherikalam Big Bazaar in Karukachal, Kottayam district, Kerala.">
+  <meta name="robots" content="noindex">
+
+  <meta name="theme-color" content="#7a3b26">
+
+  <!-- This page is deliberately self-contained: no stylesheet, script, font
+       or image is fetched.
+
+       GitHub Pages serves 404.html from the SITE ROOT whatever URL was
+       requested, so a miss at /mancherikalam/a/b/c still renders this file
+       while the browser's address bar says /a/b/c. Relative paths would
+       then resolve against the wrong folder, which is why the two links
+       below are the only root-absolute paths in the whole site. If the
+       site moves to a different base path, tools/set-domain.py rewrites
+       them (and tools/check-site.py knows to allow them here). -->
+  <style>
+    :root {
+      --bg: #fbf7f0;
+      --surface: #ffffff;
+      --line: #e4d8c6;
+      --text: #2a2118;
+      --text-dim: #5d5247;
+      --accent: #7a3b26;
+      --accent-strong: #5d2c1c;
+      --on-accent: #ffffff;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #171310;
+        --surface: #211c17;
+        --line: #3a3129;
+        --text: #f2ebe1;
+        --text-dim: #c0b4a5;
+        --accent: #d98d6a;
+        --accent-strong: #eda986;
+        --on-accent: #171310;
+      }
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      padding: 2rem 1.15rem;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        system-ui, sans-serif;
+      font-size: 17px;
+      line-height: 1.65;
+      text-align: center;
+      overflow-wrap: break-word;
+    }
+
+    /* No webfont here, so Malayalam leans on whatever the device ships. */
+    [lang="ml"] {
+      font-family: "Noto Sans Malayalam", "Nirmala UI", Manjari, Meera,
+        AnjaliOldLipi, sans-serif;
+      line-height: 1.85;
+      color: var(--text-dim);
+      font-size: .92em;
+    }
+
+    .code {
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.7rem, 7vw, 2.6rem);
+      line-height: 1.2;
+      letter-spacing: -.01em;
+    }
+
+    p { margin: 0; max-width: 34rem; }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .7rem;
+      justify-content: center;
+      margin-top: .75rem;
+    }
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: .7rem 1.4rem;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    a.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--on-accent);
+    }
+
+    a:hover { border-color: var(--accent); }
+
+    a:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+
+<body>
+  <p class="code">Error 404</p>
+
+  <h1>We could not find that page</h1>
+  <p lang="ml">ആ പേജ് കണ്ടെത്താനായില്ല.</p>
+
+  <p>The shop is still here, though. Head back to the front page and pick a shop.</p>
+
+  <div class="links">
+    <a class="primary" href="/mancherikalam/">Mancherikalam home</a>
+    <a href="/mancherikalam/supermarket/">Supermarket</a>
+    <a href="/mancherikalam/big-bazaar/">Big Bazaar</a>
+  </div>
+</body>
+
+</html>

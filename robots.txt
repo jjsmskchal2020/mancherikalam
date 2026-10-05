@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jakee4488.github.io/mancherikalam/sitemap.xml
+Sitemap: https://jjsmskchal2020.github.io/mancherikalam/sitemap.xml

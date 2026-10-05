@@ -1032,6 +1032,29 @@ td {
   font-size: clamp(2rem, 9vw, 3.25rem);
 }
 
+/* ---- photo gallery ---- */
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gallery li {
+  min-width: 0;
+}
+
+.gallery img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: var(--surface);
+  border-radius: var(--radius);
+}
+
 /* ============================================================
    Wider screens
    ============================================================ */
@@ -1039,6 +1062,11 @@ td {
 @media (min-width: 600px) {
   .cats {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .gallery {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .85rem;
   }
 
   .btn-stack {

@@ -89,6 +89,13 @@
       var url = (PAGE.maps && PAGE.maps.directions) || "";
       apply(link, url, url);
     });
+
+    /* Plain links whose href is itself a token (the Facebook page, the
+       WhatsApp group) get the same treatment until the deploy fills them. */
+    each("[data-link]", function (link) {
+      var url = link.getAttribute("href") || "";
+      apply(link, url, url);
+    });
   }
 
   function each(selector, fn) {
@@ -176,6 +183,60 @@
         mapButton.parentNode.replaceChild(frame, mapButton);
       });
     }
+  }
+
+  /* ---- gallery lightbox ---- */
+
+  /* Each thumbnail is a plain link to the full-size photo, so without
+     JavaScript (or without <dialog> support) a tap simply opens the image.
+     Here the click is upgraded to an in-page viewer that closes on Esc,
+     on the close button, or on a tap outside the photo. */
+
+  var gallery = document.querySelector("[data-gallery]");
+
+  if (gallery && typeof HTMLDialogElement === "function") {
+    var dialog = document.createElement("dialog");
+    dialog.className = "lightbox";
+    dialog.setAttribute("aria-label", "Photo");
+
+    var closeButton = document.createElement("button");
+    closeButton.className = "lightbox-close";
+    closeButton.type = "button";
+    closeButton.setAttribute("aria-label", "Close");
+    closeButton.textContent = "×";
+
+    var photo = document.createElement("img");
+    photo.width = 720;
+    photo.height = 1280;
+    photo.alt = "";
+
+    var caption = document.createElement("p");
+
+    dialog.appendChild(closeButton);
+    dialog.appendChild(photo);
+    dialog.appendChild(caption);
+    document.body.appendChild(dialog);
+
+    gallery.addEventListener("click", function (event) {
+      var link = event.target.closest ? event.target.closest("a") : null;
+      if (!link) return;
+      event.preventDefault();
+
+      var thumb = link.querySelector("img");
+      photo.src = link.getAttribute("href");
+      photo.alt = thumb ? thumb.alt : "";
+      caption.textContent = photo.alt;
+      dialog.showModal();
+    });
+
+    closeButton.addEventListener("click", function () {
+      dialog.close();
+    });
+
+    /* A click on the backdrop lands on the dialog element itself. */
+    dialog.addEventListener("click", function (event) {
+      if (event.target === dialog) dialog.close();
+    });
   }
 
   /* ---- footer year ---- */

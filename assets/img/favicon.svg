@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Mancherikalam">
-  <rect width="64" height="64" rx="14" fill="#7a3b26"/>
-  <path d="M14 46V18h7l11 17 11-17h7v28h-7V31l-8 12h-6l-8-12v15z" fill="#fbf7f0"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="MancherikalaM BigBazar">
+  <rect width="64" height="64" rx="14" fill="#1c1714"/>
+  <path d="M7 27C6 14 10 10 19 10.5c8.7.5 17.3.5 26 0C54 10 58 14 57 27" fill="none" stroke="#f3a712" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M14 52V24h7l11 17 11-17h7v28h-7V37l-8 12h-6l-8-12v15z" fill="#ffffff"/>
 </svg>

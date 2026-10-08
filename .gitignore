@@ -3,3 +3,7 @@ Thumbs.db
 desktop.ini
 __pycache__/
 *.pyc
+
+# local contact details and preview build
+.env
+_preview/

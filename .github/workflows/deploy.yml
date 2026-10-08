@@ -41,7 +41,28 @@ jobs:
             --exclude '.git' --exclude '.github' --exclude '_site' \
             --exclude 'tools' --exclude 'README.md' --exclude 'CNAME.example' \
             --exclude '.gitignore' --exclude '.gitattributes' \
+            --exclude '.env' --exclude 'site.env.example' --exclude '_preview' \
             ./ _site/
+      # Contact details live in repository Variables (Settings > Secrets and
+      # variables > Actions > Variables), not in the HTML. Unset ones stay as
+      # visible [BB_...] placeholders. See site.env.example.
+      - name: Fill contact details from repository variables
+        run: python3 tools/apply-env.py _site
+        env:
+          BB_PHONE: ${{ vars.BB_PHONE }}
+          BB_WHATSAPP: ${{ vars.BB_WHATSAPP }}
+          BB_STREET_ADDRESS: ${{ vars.BB_STREET_ADDRESS }}
+          BB_PINCODE: ${{ vars.BB_PINCODE }}
+          BB_HOURS_MON_SAT: ${{ vars.BB_HOURS_MON_SAT }}
+          BB_HOURS_SUN: ${{ vars.BB_HOURS_SUN }}
+          BB_LATITUDE: ${{ vars.BB_LATITUDE }}
+          BB_LONGITUDE: ${{ vars.BB_LONGITUDE }}
+          BB_MAPS_LINK: ${{ vars.BB_MAPS_LINK }}
+          BB_MAPS_EMBED: ${{ vars.BB_MAPS_EMBED }}
+          BB_GSTIN: ${{ vars.BB_GSTIN }}
+          BB_FSSAI: ${{ vars.BB_FSSAI }}
+          BB_FACEBOOK_URL: ${{ vars.BB_FACEBOOK_URL }}
+          BB_WHATSAPP_GROUP: ${{ vars.BB_WHATSAPP_GROUP }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site

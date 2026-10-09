@@ -1,49 +1,51 @@
 <!DOCTYPE html>
-<html lang="en" data-lang="en" data-shop="family">
+<html lang="en" data-lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Mancherikalam — Supermarket &amp; Big Bazaar, Karukachal, Kottayam</title>
+  <title>MancherikalaM BigBazar — wholesale &amp; retail, Karukachal, Kottayam</title>
   <meta name="description"
-    content="Two family-run shops in Karukachal, Kottayam district, Kerala. Mancherikalam Supermarket for everyday groceries and household needs; Mancherikalam Big Bazaar for bulk and wholesale supply to caterers, hotels and events.">
+    content="MancherikalaM BigBazar in Karukachal, Kottayam district, Kerala. Wholesale and retail rice, oils, flour, spices, frozen foods and household goods for homes, caterers, hotels and events. Order on WhatsApp.">
 
   <link rel="canonical" href="https://mancherikalam.com/">
 
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Mancherikalam">
+  <meta property="og:site_name" content="MancherikalaM BigBazar">
   <meta property="og:locale" content="en_IN">
   <meta property="og:locale:alternate" content="ml_IN">
-  <meta property="og:title" content="Mancherikalam — Supermarket &amp; Big Bazaar, Karukachal">
+  <meta property="og:title" content="MancherikalaM BigBazar — wholesale &amp; retail, Karukachal">
   <meta property="og:description"
-    content="Two family-run shops in Karukachal, Kottayam district, Kerala. Groceries and household retail, plus bulk and wholesale supply.">
+    content="Rice by the sack, oils by the case, frozen foods and everyday groceries — wholesale and retail in Karukachal, Kottayam.">
   <meta property="og:url" content="https://mancherikalam.com/">
-  <meta property="og:image" content="https://mancherikalam.com/assets/img/og-home.png">
+  <meta property="og:image" content="https://mancherikalam.com/assets/img/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Mancherikalam — two family shops in Karukachal">
+  <meta property="og:image:alt"
+    content="The lit MancherikalaM BigBazar sign beside stacks of rice sacks in the warehouse">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Mancherikalam — Supermarket &amp; Big Bazaar, Karukachal">
+  <meta name="twitter:title" content="MancherikalaM BigBazar — Karukachal, Kottayam">
   <meta name="twitter:description"
-    content="Two family-run shops in Karukachal, Kottayam district, Kerala.">
-  <meta name="twitter:image" content="https://mancherikalam.com/assets/img/og-home.png">
+    content="Wholesale and retail groceries, rice, oils and frozen foods in Karukachal, Kottayam district, Kerala.">
+  <meta name="twitter:image" content="https://mancherikalam.com/assets/img/og-image.jpg">
 
-  <meta name="theme-color" content="#7a3b26">
+  <meta name="theme-color" content="#1c1714">
 
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 
+  <!-- Quicksand and Montserrat are the closest open matches to the lettering
+       on the shop's signboard. Only the weights the wordmark and headings
+       use are requested, to keep the first load small. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400&family=Nunito+Sans:wght@400;700&display=swap">
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Noto+Sans+Malayalam:wght@400&family=Nunito+Sans:wght@400;700&family=Quicksand:wght@700&display=swap">
 
   <link rel="stylesheet" href="assets/css/styles.css">
 
-  <!-- Apply the stored language before first paint so the bilingual order
-       never visibly flips. -->
   <script>
     (function () {
       try {
@@ -55,62 +57,138 @@
     })();
   </script>
 
+  <!-- schema.org has no WholesaleStore type, so this is a Store with an
+       additionalType pointing at the ProductOntology entry for wholesale.
+       That is the conventional way to say "wholesaler" and it validates.
+
+       The [BB_...] tokens are filled from environment variables at deploy
+       time by tools/apply-env.py. See site.env.example. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": "https://mancherikalam.com/#organization",
-    "name": "Mancherikalam",
+    "@type": "Store",
+    "@id": "https://mancherikalam.com/#store",
+    "additionalType": "http://www.productontology.org/id/Wholesale",
+    "name": "MancherikalaM BigBazar",
+    "alternateName": "Mancherikalam Big Bazar",
     "url": "https://mancherikalam.com/",
+    "image": "https://mancherikalam.com/assets/img/og-image.jpg",
     "logo": "https://mancherikalam.com/assets/img/apple-touch-icon.png",
-    "image": "https://mancherikalam.com/assets/img/og-home.png",
-    "description": "Two family-run shops in Karukachal, Kottayam district, Kerala: a supermarket for everyday groceries and a wholesale store for bulk supply.",
+    "description": "Wholesale and retail store in Karukachal, Kottayam district, Kerala: rice by the sack, cooking oils, flour, sugar, spices, frozen foods, household and hygiene goods for homes, caterers, hotels, hostels and events.",
+    "telephone": "[BB_PHONE]",
+    "currenciesAccepted": "INR",
     "address": {
       "@type": "PostalAddress",
+      "streetAddress": "[BB_STREET_ADDRESS]",
       "addressLocality": "Karukachal",
       "addressRegion": "Kerala",
-      "postalCode": "[PINCODE]",
+      "postalCode": "[BB_PINCODE]",
       "addressCountry": "IN"
     },
-    "subOrganization": [
-      { "@id": "https://mancherikalam.com/supermarket/#store" },
-      { "@id": "https://mancherikalam.com/big-bazaar/#store" }
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "[BB_LATITUDE]",
+      "longitude": "[BB_LONGITUDE]"
+    },
+    "hasMap": "[BB_MAPS_LINK]",
+    "sameAs": ["[BB_FACEBOOK_URL]"],
+    "areaServed": {
+      "@type": "AdministrativeArea",
+      "name": "Kottayam district, Kerala"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "opens": "[BB_HOURS_MON_SAT_OPENS]",
+        "closes": "[BB_HOURS_MON_SAT_CLOSES]"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Sunday",
+        "opens": "[BB_HOURS_SUN_OPENS]",
+        "closes": "[BB_HOURS_SUN_CLOSES]"
+      }
     ]
   }
   </script>
 </head>
 
-<body>
-  <a class="skip" href="#shops">Skip to the shops</a>
+<body class="has-actionbar">
+  <a class="skip" href="#about">Skip to content</a>
 
-  <!-- Icon sprite. Defined once, referenced with <use> so the WhatsApp and
-       Facebook marks cost one definition each instead of one per button. -->
+  <!-- Icon sprite. Stroke attributes sit on each <symbol>, not on a shared
+       wrapper: <use> inherits properties from where it is referenced, not
+       from the symbol's position in this tree. -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <!-- The golden arc from the signboard. Drawn with a non-scaling stroke
+         so it can stretch to any wordmark width without going lopsided. -->
+    <symbol id="i-arc" viewBox="0 0 200 40" preserveAspectRatio="none">
+      <path fill="none" stroke="currentColor" stroke-linecap="round" vector-effect="non-scaling-stroke"
+        d="M5 39C2 20 9 8 34 8.5 76 10.5 124 10.5 166 8.5 191 8 198 20 195 39" />
+    </symbol>
+    <symbol id="i-wheat" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 22c1-6 4-11 10-15" />
+      <path d="M11.5 14.5c-2.8.2-4.8-1.2-5.5-3.6 2.6-.6 4.7.6 5.5 3.6z" />
+      <path d="M14 10.6c-2.6-.4-4.2-2.2-4.4-4.6 2.6-.1 4.3 1.6 4.4 4.6z" />
+      <path d="M13.2 15.2c2.6.8 4.9.1 6.1-2-2.4-1.2-4.8-.5-6.1 2z" />
+      <path d="M15.8 11c2.4.4 4.4-.6 5.2-2.8-2.4-.8-4.4.2-5.2 2.8z" />
+    </symbol>
     <symbol id="i-wa" viewBox="0 0 24 24">
       <path fill="currentColor"
         d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.45 1.33 4.95L2 22l5.22-1.37a9.9 9.9 0 0 0 4.82 1.23h.01c5.5 0 9.96-4.46 9.96-9.96 0-2.66-1.04-5.16-2.92-7.04A9.88 9.88 0 0 0 12.04 2m0 1.67c2.22 0 4.3.86 5.87 2.43a8.24 8.24 0 0 1 2.43 5.87c0 4.58-3.72 8.3-8.3 8.3a8.26 8.26 0 0 1-4.21-1.15l-.3-.18-3.1.81.83-3.02-.2-.31a8.23 8.23 0 0 1-1.27-4.44c0-4.58 3.72-8.3 8.25-8.3m-3.2 4.1c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.07s.89 2.4 1.02 2.57c.12.17 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.2-.58.2-1.08.14-1.18-.06-.1-.23-.17-.48-.29-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.25-.64.8-.78.97-.15.17-.29.19-.54.06-.25-.12-1.05-.38-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.13-.14.17-.25.25-.41.09-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.42z" />
+    </symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24">
+      <path fill="currentColor"
+        d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1z" />
     </symbol>
     <symbol id="i-fb" viewBox="0 0 24 24">
       <path fill="currentColor"
         d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H7v3h3v7h3v-7h3l1-3h-4v-2a1 1 0 0 1 1-1z" />
     </symbol>
-    <symbol id="i-arrow" viewBox="0 0 24 24">
-      <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-        stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6" />
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z" />
+      <circle cx="12" cy="10" r="2.6" />
     </symbol>
-    <symbol id="i-pin" viewBox="0 0 24 24">
-      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-        stroke-linejoin="round">
-        <path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z" />
-        <circle cx="12" cy="10" r="2.6" />
-      </g>
+    <symbol id="i-map" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 4 3 6.5v14L9 18l6 2.5 6-2.5v-14L15 6.5z" />
+      <path d="M9 4v14M15 6.5v14" />
+    </symbol>
+    <symbol id="i-store" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3.5 9.5 5 4h14l1.5 5.5" />
+      <path d="M3.5 9.5a2.8 2.8 0 0 0 5.67 0 2.8 2.8 0 0 0 5.66 0 2.8 2.8 0 0 0 5.67 0" />
+      <path d="M5 12.5V20h14v-7.5" />
+      <path d="M10 20v-4.5h4V20" />
+    </symbol>
+    <symbol id="i-sack" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 2.5h8l-1.6 3.4A8.6 8.6 0 0 1 18.5 13c0 4.4-2.9 8.5-6.5 8.5S5.5 17.4 5.5 13a8.6 8.6 0 0 1 4.1-7.1z" />
+      <path d="M9.5 13h5" />
+    </symbol>
+    <symbol id="i-snow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2.5v19M3.8 7.2l16.4 9.6M3.8 16.8l16.4-9.6" />
+      <path d="m9.5 4 2.5 2 2.5-2M9.5 20l2.5-2 2.5 2" />
+    </symbol>
+    <symbol id="i-bill" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 2.5h12v19l-3-2-3 2-3-2-3 2z" />
+      <path d="M9 8h6M9 11.5h6M9 15h3.5" />
     </symbol>
   </svg>
 
   <header class="topbar">
-    <a class="brand" href="./">
-      <img src="assets/img/logo-mancherikalam.svg" width="40" height="40" alt="">
-      <span class="brand-text">Mancherikalam</span>
+    <a class="brand" href="./" aria-label="MancherikalaM BigBazar — home">
+      <span class="wordmark" aria-hidden="true">
+        <svg class="wordmark-arc" focusable="false"><use href="#i-arc" /></svg>
+        <svg class="wordmark-wheat" viewBox="0 0 24 24" focusable="false"><use href="#i-wheat" /></svg>
+        <span class="wordmark-top">MancherikalaM</span>
+        <span class="wordmark-bottom">BIGBAZAR</span>
+      </span>
     </a>
 
     <div class="topbar-end">
@@ -127,157 +205,785 @@
     </div>
 
     <nav class="nav" id="nav" aria-label="Primary">
-      <a href="supermarket/">Supermarket</a>
-      <a href="big-bazaar/">Big Bazaar</a>
-      <a href="#visit">Find us</a>
+      <a href="#about">About</a>
+      <a href="#products">Products</a>
+      <a href="#rice">Rice</a>
+      <a href="#frozen">Frozen foods</a>
+      <a href="#business">For businesses</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#visit">Visit us</a>
     </nav>
   </header>
 
   <main>
-    <section class="hero">
+    <!-- ---- hero: the lit sign ---- -->
+    <section class="hero" aria-labelledby="hero-head">
       <div class="shell">
-        <p class="eyebrow">Karukachal · Kottayam · Kerala</p>
+        <div class="hero-inner">
+          <div class="hero-text">
+            <p class="eyebrow">Karukachal · Kottayam · Kerala</p>
 
-        <h1 class="bi">
-          <span class="bi-en">Mancherikalam</span>
-          <!-- TODO: verify Malayalam — this is the family name in Malayalam
-               script and should be spelled the way the family writes it. -->
-          <span class="bi-ml" lang="ml">മാഞ്ചേരിക്കളം</span>
-        </h1>
+            <h1 id="hero-head" class="hero-sign">
+              <span class="wordmark">
+                <svg class="wordmark-arc" aria-hidden="true" focusable="false"><use href="#i-arc" /></svg>
+                <svg class="wordmark-wheat" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-wheat" /></svg>
+                <span class="wordmark-top">MancherikalaM</span>
+                <span class="wordmark-bottom">BIGBAZAR</span>
+              </span>
+              <span class="visually-hidden"> — wholesale and retail</span>
+            </h1>
 
-        <div class="bi hero-tagline">
-          <span class="bi-en">Two family shops, one village. Serving Karukachal for
-            everyday groceries and for bulk supply.</span>
-          <!-- TODO: verify Malayalam -->
-          <span class="bi-ml" lang="ml">രണ്ട് കുടുംബ കടകൾ, ഒരു നാട്. ദൈനംദിന
-            പലവ്യഞ്ജനങ്ങൾക്കും മൊത്തവ്യാപാരത്തിനും കറുകച്ചാലിനൊപ്പം.</span>
+            <div class="bi hero-tagline">
+              <span class="bi-en">Wholesale &amp; retail, under one roof.</span>
+              <!-- TODO: verify Malayalam -->
+              <span class="bi-ml" lang="ml">മൊത്തവും ചില്ലറയും, ഒരു കുടക്കീഴിൽ.</span>
+            </div>
+
+            <div class="bi bi--prose hero-lead">
+              <p class="bi-en">Rice by the sack, oil by the case, frozen foods and everything
+                for the kitchen and the home — for families, caterers, hotels and events across
+                Kottayam district.</p>
+              <!-- TODO: verify Malayalam -->
+              <p class="bi-ml" lang="ml">ചാക്കുകണക്കിന് അരി, പെട്ടിക്കണക്കിന് എണ്ണ,
+                ഫ്രോസൺ ഭക്ഷണങ്ങൾ, അടുക്കളയ്ക്കും വീടിനും വേണ്ടതെല്ലാം — കോട്ടയം
+                ജില്ലയിലെ കുടുംബങ്ങൾക്കും കാറ്ററിംഗുകാർക്കും ഹോട്ടലുകൾക്കും
+                ചടങ്ങുകൾക്കും.</p>
+            </div>
+
+            <div class="btn-stack">
+              <a class="btn btn--gold" data-wa="order" href="#visit">
+                <svg aria-hidden="true" focusable="false"><use href="#i-wa" /></svg>
+                <span class="bi">
+                  <span class="bi-en">Order on WhatsApp</span>
+                  <!-- TODO: verify Malayalam -->
+                  <span class="bi-ml" lang="ml">വാട്ട്‌സ്ആപ്പിൽ ഓർഡർ ചെയ്യുക</span>
+                </span>
+              </a>
+              <a class="btn btn--outline-light" href="#products">
+                <span class="bi">
+                  <span class="bi-en">See what we stock</span>
+                  <!-- TODO: verify Malayalam -->
+                  <span class="bi-ml" lang="ml">ഞങ്ങളുടെ സാധനങ്ങൾ കാണുക</span>
+                </span>
+              </a>
+            </div>
+
+            <p class="hero-aside">
+              <a data-tel href="#visit">
+                <svg width="20" height="20" aria-hidden="true" focusable="false"><use href="#i-phone" /></svg>
+                <span data-tel-text>[BB_PHONE]</span>
+              </a>
+              <a data-directions href="#visit">
+                <svg width="20" height="20" aria-hidden="true" focusable="false"><use href="#i-pin" /></svg>
+                Get directions
+              </a>
+            </p>
+          </div>
+
+          <div class="mosaic">
+            <img src="assets/img/hero-1.webp" width="540" height="720" decoding="async"
+              fetchpriority="high"
+              alt="A warehouse aisle walled in with green-and-gold sacks of Bison rice">
+            <img src="assets/img/hero-2.webp" width="540" height="720" decoding="async"
+              alt="Stacked copper-coloured sacks of Daawat Supreme XXXL basmati rice">
+            <img src="assets/img/hero-3.webp" width="540" height="720" decoding="async"
+              alt="The shop floor, with rice sacks stacked high beside the shelves">
+          </div>
+        </div>
+
+        <ul class="features">
+          <li class="feature">
+            <svg aria-hidden="true" focusable="false"><use href="#i-store" /></svg>
+            <span class="bi">
+              <span class="bi-en">Wholesale &amp; retail</span>
+              <!-- TODO: verify Malayalam -->
+              <span class="bi-ml" lang="ml">മൊത്തവും ചില്ലറയും</span>
+            </span>
+          </li>
+          <li class="feature">
+            <svg aria-hidden="true" focusable="false"><use href="#i-sack" /></svg>
+            <span class="bi">
+              <span class="bi-en">Full sacks, up to 50 kg</span>
+              <!-- TODO: verify Malayalam -->
+              <span class="bi-ml" lang="ml">50 കിലോ വരെ ചാക്കുകൾ</span>
+            </span>
+          </li>
+          <li class="feature">
+            <svg aria-hidden="true" focusable="false"><use href="#i-snow" /></svg>
+            <span class="bi">
+              <span class="bi-en">Frozen foods counter</span>
+              <!-- TODO: verify Malayalam -->
+              <span class="bi-ml" lang="ml">ഫ്രോസൺ ഫുഡ് കൗണ്ടർ</span>
+            </span>
+          </li>
+          <li class="feature">
+            <svg aria-hidden="true" focusable="false"><use href="#i-bill" /></svg>
+            <span class="bi">
+              <span class="bi-en">GST bills for businesses</span>
+              <!-- TODO: verify Malayalam -->
+              <span class="bi-ml" lang="ml">സ്ഥാപനങ്ങൾക്ക് ജിഎസ്ടി ബിൽ</span>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ---- about ---- -->
+    <section id="about" class="section" aria-labelledby="about-head">
+      <div class="shell about">
+        <div>
+          <div class="section-head">
+            <p class="eyebrow">About us</p>
+            <h2 id="about-head" class="bi">
+              <span class="bi-en">A family store that stocks like a warehouse</span>
+              <!-- TODO: verify Malayalam -->
+              <span class="bi-ml" lang="ml">ഗോഡൗൺ പോലെ സ്റ്റോക്കുള്ള ഒരു കുടുംബ
+                സ്ഥാപനം</span>
+            </h2>
+          </div>
+
+          <div class="bi bi--prose">
+            <p class="bi-en">MancherikalaM BigBazar is our family's wholesale and retail
+              store in Karukachal. Walk in for a week's groceries, or send us a list for a
+              wedding feast — our warehouse holds rice, oils, flour, sugar and spices in
+              bulk, and the shop floor carries the everyday brands Kerala kitchens rely on.
+              Tell us what you need and by when, and we will quote you on WhatsApp.</p>
+            <!-- TODO: verify Malayalam -->
+            <p class="bi-ml" lang="ml">മാഞ്ചേരിക്കളം ബിഗ് ബസാർ കറുകച്ചാലിലെ ഞങ്ങളുടെ
+              കുടുംബത്തിന്റെ മൊത്ത-ചില്ലറ വ്യാപാര സ്ഥാപനമാണ്. ഒരാഴ്ചത്തെ
+              വീട്ടുസാധനങ്ങൾ വാങ്ങാനോ ഒരു കല്യാണസദ്യയ്ക്കുള്ള ലിസ്റ്റ് അയയ്ക്കാനോ
+              ഞങ്ങളുടെ അടുത്തേക്ക് വരാം. അരി, എണ്ണ, മാവ്, പഞ്ചസാര, മസാലകൾ എന്നിവ
+              ഞങ്ങളുടെ ഗോഡൗണിൽ മൊത്തമായി ലഭ്യമാണ്. എന്ത്, എപ്പോൾ വേണമെന്ന് പറയുക —
+              ഞങ്ങൾ വാട്ട്‌സ്ആപ്പിൽ വില അറിയിക്കാം.</p>
+          </div>
+
+          <ul class="serve chips">
+            <li class="chip chip--accent">Homes</li>
+            <li class="chip chip--accent">Caterers</li>
+            <li class="chip chip--accent">Hotels &amp; restaurants</li>
+            <li class="chip chip--accent">Hostels &amp; canteens</li>
+            <li class="chip chip--accent">Weddings &amp; events</li>
+            <li class="chip chip--accent">Parish functions</li>
+          </ul>
+        </div>
+
+        <figure class="about-sign">
+          <img src="assets/img/sign.webp" width="650" height="284" loading="lazy" decoding="async"
+            alt="The lit MancherikalaM BigBazar sign — white letters under a golden arc, on a dark slatted wall">
+          <figcaption>Our sign, inside the store at Karukachal.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ---- products ---- -->
+    <section id="products" class="section section--soft" aria-labelledby="products-head">
+      <div class="shell">
+        <div class="section-head">
+          <p class="eyebrow">What we stock</p>
+          <h2 id="products-head" class="bi">
+            <span class="bi-en">Everything for the kitchen and the home</span>
+            <!-- TODO: verify Malayalam -->
+            <span class="bi-ml" lang="ml">അടുക്കളയ്ക്കും വീടിനും വേണ്ടതെല്ലാം</span>
+          </h2>
+          <p class="section-lead">Every photo here is our own stock. Brands shown are the ones
+            on our shelves today — ask on WhatsApp for anything you don't see.</p>
+        </div>
+
+        <ul class="photo-cards">
+          <li>
+            <figure class="photo-card">
+              <img src="assets/img/cat-rice.webp" width="720" height="540" loading="lazy" decoding="async"
+                alt="Sacks of Bison, Chakra and Mayil matta rice stacked in the warehouse">
+              <figcaption>
+                <h3 class="bi">
+                  <span class="bi-en">Rice</span>
+                  <span class="bi-ml" lang="ml">അരി</span>
+                </h3>
+                <p class="brands">Matta, Jaya, basmati, kaima, idli &amp; dosa</p>
+              </figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="photo-card">
+              <img src="assets/img/cat-oils.webp" width="720" height="540" loading="lazy" decoding="async"
+                alt="Cartons of Kera Drops coconut oil stacked high">
+              <figcaption>
+                <h3 class="bi">
+                  <span class="bi-en">Cooking oils</span>
+                  <span class="bi-ml" lang="ml">എണ്ണകൾ</span>
+                </h3>
+                <p class="brands">Kera Drops · Aadhar · Ruchi Gold</p>
+              </figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="photo-card">
+              <img src="assets/img/cat-flour.webp" width="720" height="540" loading="lazy" decoding="async"
+                alt="Stacked bags of NiraNazhy refined wheat flour (maida)">
+              <figcaption>
+                <h3 class="bi">
+                  <span class="bi-en">Flour, sugar &amp; pulses</span>
+                  <!-- TODO: verify Malayalam -->
+                  <span class="bi-ml" lang="ml">മാവ്, പഞ്ചസാര, പയറുവർഗ്ഗങ്ങൾ</span>
+                </h3>
+                <p class="brands">NiraNazhy maida · porotta maida · crystal sugar</p>
+              </figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="photo-card">
+              <img src="assets/img/cat-spices.webp" width="720" height="540" loading="lazy" decoding="async"
+                alt="Red shelves of Eastern masala packets">
+              <figcaption>
+                <h3 class="bi">
+                  <span class="bi-en">Spices &amp; masalas</span>
+                  <span class="bi-ml" lang="ml">മസാലകൾ</span>
+                </h3>
+                <p class="brands">Eastern · Pinch · whole spices</p>
+              </figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="photo-card">
+              <img src="assets/img/cat-frozen.webp" width="720" height="540" loading="lazy" decoding="async"
+                alt="A freezer of Switz parathas and McCain french fries">
+              <figcaption>
+                <h3 class="bi">
+                  <span class="bi-en">Frozen foods</span>
+                  <!-- TODO: verify Malayalam -->
+                  <span class="bi-ml" lang="ml">ഫ്രോസൺ ഭക്ഷണങ്ങൾ</span>
+                </h3>
+                <p class="brands">Brillar · Switz · McCain · Venky's</p>
+              </figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="photo-card">
+              <img src="assets/img/cat-veg.webp" width="720" height="540" loading="lazy" decoding="async"
+                alt="Crates of tomatoes, carrots, green chillies and beans">
+              <figcaption>
+                <h3 class="bi">
+                  <span class="bi-en">Vegetables &amp; eggs</span>
+                  <!-- TODO: verify Malayalam -->
+                  <span class="bi-ml" lang="ml">പച്ചക്കറികളും മുട്ടയും</span>
+                </h3>
+                <p class="brands">At the frozen foods counter</p>
+              </figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="photo-card">
+              <img src="assets/img/cat-tea.webp" width="720" height="540" loading="lazy" decoding="async"
+                alt="Shelves of Nescafé Sunrise, Tata Tea Kanan Devan and Grand coffee packs">
+              <figcaption>
+                <h3 class="bi">
+                  <span class="bi-en">Tea &amp; coffee</span>
+                  <!-- TODO: verify Malayalam -->
+                  <span class="bi-ml" lang="ml">ചായയും കാപ്പിയും</span>
+                </h3>
+                <p class="brands">Kanan Devan · Nescafé Sunrise · Bru · Grand</p>
+              </figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="photo-card">
+              <img src="assets/img/cat-snacks.webp" width="720" height="540" loading="lazy" decoding="async"
+                alt="Haldiram's rasgulla and gulab jamun tins beside Quaker Oats and Unibic cookies">
+              <figcaption>
+                <h3 class="bi">
+                  <span class="bi-en">Snacks, sweets &amp; breakfast</span>
+                  <!-- TODO: verify Malayalam -->
+                  <span class="bi-ml" lang="ml">പലഹാരങ്ങളും മധുരങ്ങളും</span>
+                </h3>
+                <p class="brands">Haldiram's · Unibic · Quaker</p>
+              </figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="photo-card">
+              <img src="assets/img/cat-ghee.webp" width="720" height="540" loading="lazy" decoding="async"
+                alt="Shelves of cow ghee jars and tins, with sauces and food colours below">
+              <figcaption>
+                <h3 class="bi">
+                  <span class="bi-en">Ghee, sauces &amp; cooking aids</span>
+                  <!-- TODO: verify Malayalam -->
+                  <span class="bi-ml" lang="ml">നെയ്യ്, സോസുകൾ</span>
+                </h3>
+                <p class="brands">RKG · Dairy Stop · American Garden · Coral</p>
+              </figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="photo-card">
+              <img src="assets/img/cat-drinks.webp" width="720" height="540" loading="lazy" decoding="async"
+                alt="A shelf of Tropicana juices, Pepsi cans and soft drinks">
+              <figcaption>
+                <h3 class="bi">
+                  <span class="bi-en">Water &amp; beverages</span>
+                  <span class="bi-ml" lang="ml">പാനീയങ്ങൾ</span>
+                </h3>
+                <p class="brands">Packaged water · Tropicana · Pepsi · Rasna</p>
+              </figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="photo-card">
+              <img src="assets/img/cat-cleaning.webp" width="720" height="540" loading="lazy" decoding="async"
+                alt="An aisle of Exo dishwash, Sanifresh, Domex and detergent bottles">
+              <figcaption>
+                <h3 class="bi">
+                  <span class="bi-en">Household &amp; cleaning</span>
+                  <!-- TODO: verify Malayalam -->
+                  <span class="bi-ml" lang="ml">ശുചീകരണ സാമഗ്രികൾ</span>
+                </h3>
+                <p class="brands">Exo · Domex · Ariel · Surf Excel · Tide</p>
+              </figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="photo-card">
+              <img src="assets/img/cat-hygiene.webp" width="720" height="540" loading="lazy" decoding="async"
+                alt="Shelves of Kressa tissues, Pampers diapers and Stayfree pads">
+              <figcaption>
+                <h3 class="bi">
+                  <span class="bi-en">Paper &amp; hygiene</span>
+                  <!-- TODO: verify Malayalam -->
+                  <span class="bi-ml" lang="ml">ടിഷ്യൂ, ശുചിത്വ സാമഗ്രികൾ</span>
+                </h3>
+                <p class="brands">Fresh N Fine · Softex · Kressa · Pampers · Stayfree</p>
+              </figcaption>
+            </figure>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ---- rice wall ---- -->
+    <section id="rice" class="section" aria-labelledby="rice-head">
+      <div class="shell split">
+        <div>
+          <div class="section-head">
+            <p class="eyebrow">The rice wall</p>
+            <h2 id="rice-head" class="bi">
+              <span class="bi-en">Every rice a Kerala kitchen cooks</span>
+              <!-- TODO: verify Malayalam -->
+              <span class="bi-ml" lang="ml">കേരളത്തിലെ അടുക്കളകൾക്ക് വേണ്ട എല്ലാ
+                അരിയും</span>
+            </h2>
+            <p class="section-lead">From everyday matta to festival biryani — by the kilo
+              in the shop, or by the sack for your kitchen.</p>
+          </div>
+
+          <ul class="rice-groups">
+            <li class="rice-group">
+              <h3 class="bi">
+                <span class="bi-en">Matta rice</span>
+                <span class="bi-ml" lang="ml">മട്ട അരി</span>
+              </h3>
+              <ul class="chips">
+                <li class="chip">Mayil</li>
+                <li class="chip">Nirmal</li>
+                <li class="chip">Pavizham</li>
+                <li class="chip">Rabbit</li>
+              </ul>
+            </li>
+            <li class="rice-group">
+              <h3 class="bi">
+                <span class="bi-en">Jaya rice</span>
+                <span class="bi-ml" lang="ml">ജയ അരി</span>
+              </h3>
+              <ul class="chips">
+                <li class="chip">Kishan</li>
+              </ul>
+            </li>
+            <li class="rice-group">
+              <h3 class="bi">
+                <span class="bi-en">Basmati</span>
+                <span class="bi-ml" lang="ml">ബസ്മതി</span>
+              </h3>
+              <ul class="chips">
+                <li class="chip">Daawat Supreme XXXL</li>
+                <li class="chip">Lal Qilla</li>
+                <li class="chip">Kohinoor</li>
+              </ul>
+            </li>
+            <li class="rice-group">
+              <h3 class="bi">
+                <span class="bi-en">Kaima &amp; biryani rice</span>
+                <!-- TODO: verify Malayalam -->
+                <span class="bi-ml" lang="ml">കൈമ, ബിരിയാണി അരി</span>
+              </h3>
+              <ul class="chips">
+                <li class="chip">Rose Brand</li>
+                <li class="chip">Barkath</li>
+                <li class="chip">Burdwan</li>
+              </ul>
+            </li>
+            <li class="rice-group">
+              <h3 class="bi">
+                <span class="bi-en">Idli &amp; dosa rice</span>
+                <!-- TODO: verify Malayalam -->
+                <span class="bi-ml" lang="ml">ഇഡ്ഡലി, ദോശ അരി</span>
+              </h3>
+              <ul class="chips">
+                <li class="chip">Orange</li>
+                <li class="chip">Orange Gold</li>
+              </ul>
+            </li>
+            <li class="rice-group">
+              <h3 class="bi">
+                <span class="bi-en">Sorted rice</span>
+                <!-- TODO: verify Malayalam -->
+                <span class="bi-ml" lang="ml">സോർട്ടഡ് അരി</span>
+              </h3>
+              <ul class="chips">
+                <li class="chip">Bison</li>
+                <li class="chip">Nida</li>
+                <li class="chip">Chakra</li>
+                <li class="chip">Super Sorted</li>
+              </ul>
+            </li>
+          </ul>
+
+          <p class="note">Most rice comes in 25 kg, 30 kg and 50 kg sacks. Ask for the
+            pack size you need.</p>
+        </div>
+
+        <div class="photo-grid">
+          <img src="assets/img/rice-1.webp" width="480" height="480" loading="lazy" decoding="async"
+            alt="Green sacks of Rose Brand premium kaima rice">
+          <img src="assets/img/rice-2.webp" width="480" height="480" loading="lazy" decoding="async"
+            alt="Orange sacks of Orange premium idli and dosa rice">
+          <img src="assets/img/rice-3.webp" width="480" height="480" loading="lazy" decoding="async"
+            alt="Blue and yellow sacks of Super Sorted rice">
+          <img src="assets/img/rice-4.webp" width="480" height="480" loading="lazy" decoding="async"
+            alt="Red and white sacks of Nida rice">
         </div>
       </div>
     </section>
 
-    <section id="shops" class="shell" aria-labelledby="shops-head">
-      <h2 id="shops-head" class="visually-hidden">Choose a shop</h2>
-
-      <div class="chooser">
-        <article class="shop-card shop-card--supermarket">
-          <img src="assets/img/card-supermarket.webp" width="800" height="600" loading="lazy"
-            decoding="async"
-            alt="The blue Mancherikalam Supermarket building in Karukachal, with parking in front">
-
-          <div class="shop-card-body">
-            <h2 class="bi">
-              <span class="bi-en">Mancherikalam Supermarket</span>
-              <!-- TODO: verify Malayalam -->
-              <span class="bi-ml" lang="ml">മാഞ്ചേരിക്കളം സൂപ്പർമാർക്കറ്റ്</span>
-            </h2>
-
-            <div class="bi">
-              <span class="bi-en">Everyday groceries, provisions and household needs for
-                families in and around Karukachal.</span>
-              <!-- TODO: verify Malayalam -->
-              <span class="bi-ml" lang="ml">കറുകച്ചാലിലെയും പരിസരത്തെയും കുടുംബങ്ങൾക്കായി
-                ദൈനംദിന പലവ്യഞ്ജനങ്ങളും വീട്ടുസാധനങ്ങളും.</span>
+    <!-- ---- frozen foods ---- -->
+    <section id="frozen" class="section section--wash" aria-labelledby="frozen-head">
+      <div class="shell">
+        <div class="split">
+          <div>
+            <div class="section-head">
+              <p class="eyebrow">Frozen foods</p>
+              <h2 id="frozen-head" class="bi">
+                <span class="bi-en">Frozen foods, wholesale &amp; retail</span>
+                <!-- TODO: verify Malayalam -->
+                <span class="bi-ml" lang="ml">ഫ്രോസൺ ഭക്ഷണങ്ങൾ — മൊത്തവും
+                  ചില്ലറയും</span>
+              </h2>
+              <p class="section-lead">Our frozen foods counter stocks chicken, snacks and
+                ready-to-cook breads by the packet or by the carton — with vegetables and eggs
+                at the same counter.</p>
             </div>
 
-            <a class="btn btn--primary btn--block" href="supermarket/">
-              <span class="bi">
-                <span class="bi-en">Visit the Supermarket</span>
-                <!-- TODO: verify Malayalam -->
-                <span class="bi-ml" lang="ml">സൂപ്പർമാർക്കറ്റ് കാണുക</span>
-              </span>
-              <svg aria-hidden="true" focusable="false"><use href="#i-arrow" /></svg>
-            </a>
+            <h3 class="sub-head">Brands</h3>
+            <!-- TODO: confirm "Maccam" — spelled as on the signboard. -->
+            <ul class="chips">
+              <li class="chip">Venky's</li>
+              <li class="chip">Suguna</li>
+              <li class="chip">Abad</li>
+              <li class="chip">Brillar</li>
+              <li class="chip">Maccam</li>
+              <li class="chip">MPI</li>
+              <li class="chip">McCain</li>
+              <li class="chip">Switz</li>
+            </ul>
+
+            <h3 class="sub-head">On the shelf</h3>
+            <ul class="ticks">
+              <li>Chicken nuggets and popcorn chicken</li>
+              <li>Heat-and-eat wheat parotta and puff-dough paratha</li>
+              <li>Samosa sheets and french fries</li>
+              <li>Green peas and mixed vegetables</li>
+            </ul>
           </div>
-        </article>
 
-        <article class="shop-card shop-card--big-bazaar">
-          <img src="assets/img/card-big-bazaar.svg" width="800" height="600" loading="lazy"
-            decoding="async"
-            alt="Placeholder artwork for Mancherikalam Big Bazaar — stacked bulk crates on an orange ground">
+          <div>
+            <figure class="signboard">
+              <img src="assets/img/frozen-sign.webp" width="720" height="205" loading="lazy" decoding="async"
+                alt="Our yellow signboard: Frozen Foods — Wholesale &amp; Retail. Venkies, Suguna, Abad, Brillar, Maccam, MPI">
+            </figure>
 
-          <div class="shop-card-body">
-            <h2 class="bi">
-              <span class="bi-en">Mancherikalam Big Bazaar</span>
-              <!-- TODO: verify Malayalam -->
-              <span class="bi-ml" lang="ml">മാഞ്ചേരിക്കളം ബിഗ് ബസാർ</span>
-            </h2>
-
-            <div class="bi">
-              <span class="bi-en">Bulk and wholesale supply for caterers, hotels, hostels
-                and event planners.</span>
-              <!-- TODO: verify Malayalam -->
-              <span class="bi-ml" lang="ml">കാറ്ററിംഗുകാർ, ഹോട്ടലുകൾ, ഹോസ്റ്റലുകൾ,
-                ചടങ്ങുകൾ എന്നിവയ്ക്കുള്ള മൊത്തവ്യാപാര വിതരണം.</span>
+            <div class="photo-grid photo-grid--3">
+              <img src="assets/img/frozen-1.webp" width="480" height="480" loading="lazy" decoding="async"
+                alt="Chicken popcorn and chicken nuggets packs beside Brillar wheat parotta">
+              <img src="assets/img/frozen-2.webp" width="480" height="480" loading="lazy" decoding="async"
+                alt="A freezer full of Brillar mixed vegetables and green peas">
+              <img src="assets/img/frozen-3.webp" width="480" height="480" loading="lazy" decoding="async"
+                alt="A Venky's chest freezer">
             </div>
-
-            <a class="btn btn--primary btn--block" href="big-bazaar/">
-              <span class="bi">
-                <span class="bi-en">Visit Big Bazaar</span>
-                <!-- TODO: verify Malayalam -->
-                <span class="bi-ml" lang="ml">ബിഗ് ബസാർ കാണുക</span>
-              </span>
-              <svg aria-hidden="true" focusable="false"><use href="#i-arrow" /></svg>
-            </a>
           </div>
-        </article>
+        </div>
       </div>
     </section>
 
-    <section id="visit" class="section section--wash" aria-labelledby="visit-head">
+    <!-- ---- brands ---- -->
+    <section class="section" aria-labelledby="brands-head">
       <div class="shell">
         <div class="section-head">
-          <p class="eyebrow">Find us</p>
-          <h2 id="visit-head" class="bi">
-            <span class="bi-en">Both shops are in Karukachal</span>
+          <p class="eyebrow">Brands</p>
+          <h2 id="brands-head" class="bi">
+            <span class="bi-en">Brands on our shelves</span>
             <!-- TODO: verify Malayalam -->
-            <span class="bi-ml" lang="ml">രണ്ട് കടകളും കറുകച്ചാലിൽ</span>
+            <span class="bi-ml" lang="ml">ഞങ്ങളുടെ ഷെൽഫുകളിലെ ബ്രാൻഡുകൾ</span>
+          </h2>
+        </div>
+
+        <ul class="chips chips--lg">
+          <li class="chip">Daawat</li>
+          <li class="chip">Lal Qilla</li>
+          <li class="chip">Kohinoor</li>
+          <li class="chip">Kishan</li>
+          <li class="chip">Mayil</li>
+          <li class="chip">Aadhar</li>
+          <li class="chip">Ruchi Gold</li>
+          <li class="chip">Kera Drops</li>
+          <li class="chip">Eastern</li>
+          <li class="chip">Tata Tea Kanan Devan</li>
+          <li class="chip">Nescafé</li>
+          <li class="chip">Bru</li>
+          <li class="chip">Haldiram's</li>
+          <li class="chip">Quaker</li>
+          <li class="chip">Unibic</li>
+          <li class="chip">Brillar</li>
+          <li class="chip">McCain</li>
+          <li class="chip">Venky's</li>
+          <li class="chip">Exo</li>
+          <li class="chip">Ariel</li>
+          <li class="chip">Surf Excel</li>
+          <li class="chip">Domex</li>
+          <li class="chip">Pampers</li>
+          <li class="chip">Stayfree</li>
+          <li class="chip">Softex</li>
+          <li class="chip">Fresh N Fine</li>
+          <li class="chip">Classmate</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ---- for businesses ---- -->
+    <section id="business" class="section section--soft" aria-labelledby="business-head">
+      <div class="shell">
+        <div class="biz">
+          <p class="eyebrow">For businesses</p>
+          <h2 id="business-head" class="bi">
+            <span class="bi-en">Caterers, hotels and event planners</span>
+            <!-- TODO: verify Malayalam -->
+            <span class="bi-ml" lang="ml">കാറ്ററിംഗുകാർ, ഹോട്ടലുകൾ, ചടങ്ങ്
+              സംഘാടകർ</span>
+          </h2>
+
+          <div class="bi bi--prose biz-lead">
+            <p class="bi-en">Send us your list and we will quote bulk pricing on WhatsApp.
+              Regular suppliers to weddings, parish functions, hostels and canteens are
+              welcome to set up a standing order.</p>
+            <!-- TODO: verify Malayalam -->
+            <p class="bi-ml" lang="ml">നിങ്ങളുടെ ലിസ്റ്റ് അയയ്ക്കുക, ഞങ്ങൾ
+              വാട്ട്‌സ്ആപ്പിൽ മൊത്ത വില അറിയിക്കാം. വിവാഹങ്ങൾ, ഇടവക ചടങ്ങുകൾ,
+              ഹോസ്റ്റലുകൾ, കാന്റീനുകൾ എന്നിവയ്ക്ക് സ്ഥിരം ഓർഡർ ക്രമീകരിക്കാവുന്നതാണ്.</p>
+          </div>
+
+          <ol class="steps">
+            <li class="step">
+              <h3 class="bi">
+                <span class="bi-en">Send your list</span>
+                <!-- TODO: verify Malayalam -->
+                <span class="bi-ml" lang="ml">ലിസ്റ്റ് അയയ്ക്കുക</span>
+              </h3>
+              <p>Items, quantities and the date you need them — on WhatsApp.</p>
+            </li>
+            <li class="step">
+              <h3 class="bi">
+                <span class="bi-en">Get a bulk quote</span>
+                <!-- TODO: verify Malayalam -->
+                <span class="bi-ml" lang="ml">മൊത്ത വില അറിയുക</span>
+              </h3>
+              <p>Wholesale rates on full sacks and cases, with a GST bill if you need one.</p>
+            </li>
+            <li class="step">
+              <h3 class="bi">
+                <span class="bi-en">Collect your order</span>
+                <!-- TODO: verify Malayalam -->
+                <span class="bi-ml" lang="ml">ഓർഡർ കൈപ്പറ്റുക</span>
+              </h3>
+              <p>We keep it packed and ready at the store in Karukachal.</p>
+            </li>
+          </ol>
+
+          <div class="btn-stack">
+            <a class="btn btn--primary" data-wa="bulk" href="#visit">
+              <svg aria-hidden="true" focusable="false"><use href="#i-wa" /></svg>
+              <span class="bi">
+                <span class="bi-en">Enquire about bulk pricing</span>
+                <!-- TODO: verify Malayalam -->
+                <span class="bi-ml" lang="ml">മൊത്ത വില അന്വേഷിക്കുക</span>
+              </span>
+            </a>
+            <a class="btn btn--ghost" data-tel href="#visit">
+              <svg aria-hidden="true" focusable="false"><use href="#i-phone" /></svg>
+              <span data-tel-text>[BB_PHONE]</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---- gallery ---- -->
+    <section id="gallery" class="section" aria-labelledby="gallery-head">
+      <div class="shell">
+        <div class="section-head">
+          <p class="eyebrow">Gallery</p>
+          <h2 id="gallery-head" class="bi">
+            <span class="bi-en">Inside the store and the warehouse</span>
+            <!-- TODO: verify Malayalam -->
+            <span class="bi-ml" lang="ml">കടയ്ക്കുള്ളിലും ഗോഡൗണിലും</span>
+          </h2>
+        </div>
+
+        <!-- Each thumbnail links to the full photo, so the gallery works as
+             plain links without JavaScript; main.js upgrades the click to a
+             lightbox. -->
+        <ul class="gallery" data-gallery>
+          <li><a href="assets/img/gal-1-lg.webp"><img src="assets/img/gal-1.webp" width="480" height="600"
+                loading="lazy" decoding="async"
+                alt="The shop floor, with green rice sacks stacked to the roof beside the aisles"></a></li>
+          <li><a href="assets/img/gal-2-lg.webp"><img src="assets/img/gal-2.webp" width="480" height="600"
+                loading="lazy" decoding="async"
+                alt="An aisle of packed dry fruits, nuts and snacks"></a></li>
+          <li><a href="assets/img/gal-3-lg.webp"><img src="assets/img/gal-3.webp" width="480" height="600"
+                loading="lazy" decoding="async"
+                alt="Long shelves of packaged foods and spices"></a></li>
+          <li><a href="assets/img/gal-4-lg.webp"><img src="assets/img/gal-4.webp" width="480" height="600"
+                loading="lazy" decoding="async"
+                alt="Shelves of breakfast cereals, noodles and packaged foods"></a></li>
+          <li><a href="assets/img/gal-5-lg.webp"><img src="assets/img/gal-5.webp" width="480" height="600"
+                loading="lazy" decoding="async"
+                alt="The detergent aisle — liquid detergents, fabric stiffener and bleach"></a></li>
+          <li><a href="assets/img/gal-6-lg.webp"><img src="assets/img/gal-6.webp" width="480" height="600"
+                loading="lazy" decoding="async"
+                alt="Coconut oil bottles above incense, candles and floor cleaners"></a></li>
+          <li><a href="assets/img/gal-7-lg.webp"><img src="assets/img/gal-7.webp" width="480" height="600"
+                loading="lazy" decoding="async"
+                alt="Kitchen towels, tissues, diapers and paper cups on long shelves"></a></li>
+          <li><a href="assets/img/gal-8-lg.webp"><img src="assets/img/gal-8.webp" width="480" height="600"
+                loading="lazy" decoding="async"
+                alt="Fruit drink cans, olive oil, sauces and soy sauce bottles"></a></li>
+          <li><a href="assets/img/gal-9-lg.webp"><img src="assets/img/gal-9.webp" width="480" height="600"
+                loading="lazy" decoding="async"
+                alt="A wall of biryani rice sacks in the warehouse"></a></li>
+          <li><a href="assets/img/gal-10-lg.webp"><img src="assets/img/gal-10.webp" width="480" height="600"
+                loading="lazy" decoding="async"
+                alt="Hundreds of red Lal Qilla basmati sacks stacked in the warehouse"></a></li>
+          <li><a href="assets/img/gal-11-lg.webp"><img src="assets/img/gal-11.webp" width="480" height="600"
+                loading="lazy" decoding="async"
+                alt="Black Kitchen King sacks stacked above white sacks in the warehouse"></a></li>
+          <li><a href="assets/img/gal-12-lg.webp"><img src="assets/img/gal-12.webp" width="480" height="600"
+                loading="lazy" decoding="async"
+                alt="Storeroom racks of Pinch cartons, tins and sacks"></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ---- visit us ---- -->
+    <section id="visit" class="section section--soft" aria-labelledby="visit-head">
+      <div class="shell">
+        <div class="section-head">
+          <p class="eyebrow">Visit us</p>
+          <h2 id="visit-head" class="bi">
+            <span class="bi-en">Visit us</span>
+            <!-- TODO: verify Malayalam -->
+            <span class="bi-ml" lang="ml">ഞങ്ങളെ സന്ദർശിക്കുക</span>
           </h2>
         </div>
 
         <div class="visit">
-          <div class="visit-block">
-            <h3 class="bi">
-              <span class="bi-en">Mancherikalam Supermarket</span>
-              <!-- TODO: verify Malayalam -->
-              <span class="bi-ml" lang="ml">മാഞ്ചേരിക്കളം സൂപ്പർമാർക്കറ്റ്</span>
-            </h3>
-            <address class="address">Aniyara Arcade Building, Junction</address>
-            <p><a href="supermarket/#visit">Opening hours, phone and map →</a></p>
+          <div>
+            <div class="visit-block">
+              <h3 class="bi">
+                <span class="bi-en">Address</span>
+                <!-- TODO: verify Malayalam -->
+                <span class="bi-ml" lang="ml">വിലാസം</span>
+              </h3>
+              <address class="address">MancherikalaM BigBazar<br>[BB_STREET_ADDRESS]<br>Karukachal,
+                Kottayam district, Kerala [BB_PINCODE]</address>
+            </div>
+
+            <div class="visit-block">
+              <div class="table-wrap">
+                <table>
+                  <caption>Opening hours · <span lang="ml">പ്രവൃത്തി സമയം</span></caption>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Monday – Saturday</th>
+                      <td>[BB_HOURS_MON_SAT]</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Sunday</th>
+                      <td>[BB_HOURS_SUN]</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="visit-block btn-stack">
+              <a class="btn btn--ghost" data-tel href="#visit">
+                <svg aria-hidden="true" focusable="false"><use href="#i-phone" /></svg>
+                <span data-tel-text>[BB_PHONE]</span>
+              </a>
+              <a class="btn btn--ghost" data-directions href="#visit">
+                <svg aria-hidden="true" focusable="false"><use href="#i-pin" /></svg>
+                <span class="bi">
+                  <span class="bi-en">Get directions</span>
+                  <!-- TODO: verify Malayalam -->
+                  <span class="bi-ml" lang="ml">വഴി കാണിക്കുക</span>
+                </span>
+              </a>
+            </div>
           </div>
 
-          <div class="visit-block">
-            <h3 class="bi">
-              <span class="bi-en">Mancherikalam Big Bazaar</span>
-              <!-- TODO: verify Malayalam -->
-              <span class="bi-ml" lang="ml">മാഞ്ചേരിക്കളം ബിഗ് ബസാർ</span>
-            </h3>
-            <address class="address">[ADDRESS - BIG BAZAAR]</address>
-            <p><a href="big-bazaar/#visit">Opening hours, phone and map →</a></p>
+          <div class="map">
+            <button class="map-load" type="button" data-map
+              data-map-title="Map showing MancherikalaM BigBazar, Karukachal">
+              <svg aria-hidden="true" focusable="false"><use href="#i-map" /></svg>
+              <span class="bi">
+                <span class="bi-en">Tap to load the map</span>
+                <!-- TODO: verify Malayalam -->
+                <span class="bi-ml" lang="ml">ഭൂപടം കാണാൻ തൊടുക</span>
+              </span>
+              <small>Loads Google Maps only when you ask</small>
+            </button>
           </div>
         </div>
       </div>
     </section>
   </main>
 
+  <!-- ---- footer ---- -->
   <footer class="site-footer">
     <div class="shell">
+      <div class="footer-brand">
+        <span class="wordmark" aria-hidden="true">
+          <svg class="wordmark-arc" focusable="false"><use href="#i-arc" /></svg>
+          <svg class="wordmark-wheat" viewBox="0 0 24 24" focusable="false"><use href="#i-wheat" /></svg>
+          <span class="wordmark-top">MancherikalaM</span>
+          <span class="wordmark-bottom">BIGBAZAR</span>
+        </span>
+      </div>
+
       <div class="footer-grid">
         <div class="footer-col">
-          <h2>Our shops</h2>
+          <h2>Follow us</h2>
           <div class="footer-links">
-            <a href="supermarket/">Mancherikalam Supermarket</a>
-            <a href="big-bazaar/">Mancherikalam Big Bazaar</a>
-          </div>
-        </div>
-
-        <div class="footer-col">
-          <h2>Supermarket</h2>
-          <div class="footer-links">
-            <a href="https://www.facebook.com/mancherikalm.supermarket/">
+            <a data-link href="[BB_FACEBOOK_URL]">
               <svg width="20" height="20" aria-hidden="true" focusable="false"><use href="#i-fb" /></svg>
               Facebook
             </a>
-            <a href="https://chat.whatsapp.com/GsqXYfEcHeH677uaSO3FXn">
+            <a data-link href="[BB_WHATSAPP_GROUP]">
               <svg width="20" height="20" aria-hidden="true" focusable="false"><use href="#i-wa" /></svg>
               WhatsApp group
             </a>
@@ -285,23 +991,33 @@
         </div>
 
         <div class="footer-col">
-          <h2>Big Bazaar</h2>
+          <h2>Contact</h2>
           <div class="footer-links">
-            <a href="[FACEBOOK URL - BIG BAZAAR]">
-              <svg width="20" height="20" aria-hidden="true" focusable="false"><use href="#i-fb" /></svg>
-              Facebook
+            <a data-tel href="#visit">
+              <svg width="20" height="20" aria-hidden="true" focusable="false"><use href="#i-phone" /></svg>
+              <span data-tel-text>[BB_PHONE]</span>
             </a>
-            <a href="[WHATSAPP GROUP LINK - BIG BAZAAR]">
+            <a data-wa="order" href="#visit">
               <svg width="20" height="20" aria-hidden="true" focusable="false"><use href="#i-wa" /></svg>
-              WhatsApp group
+              WhatsApp us
             </a>
           </div>
         </div>
 
         <div class="footer-col">
-          <h2>Where</h2>
+          <h2>Licences</h2>
+          <dl class="legal">
+            <dt>FSSAI</dt>
+            <dd>[BB_FSSAI]</dd>
+            <dt>GSTIN</dt>
+            <dd>[BB_GSTIN]</dd>
+          </dl>
+        </div>
+
+        <div class="footer-col">
+          <h2>Find us</h2>
           <div class="footer-links">
-            <a href="#visit">
+            <a data-directions href="#visit">
               <svg width="20" height="20" aria-hidden="true" focusable="false"><use href="#i-pin" /></svg>
               Karukachal, Kottayam
             </a>
@@ -309,14 +1025,51 @@
         </div>
       </div>
 
-      <p class="copyright">© <span id="year">2026</span> Mancherikalam, Karukachal,
+      <p class="copyright">© <span id="year">2026</span> MancherikalaM BigBazar, Karukachal,
         Kottayam district, Kerala.</p>
     </div>
   </footer>
 
-  <!-- Page data. Edit shop details here; edit visible copy in the HTML above. -->
+  <!-- ---- sticky actions (mobile) ---- -->
+  <div class="actionbar">
+    <a class="btn btn--primary" data-wa="order" href="#visit">
+      <svg aria-hidden="true" focusable="false"><use href="#i-wa" /></svg>
+      WhatsApp
+    </a>
+    <a class="btn btn--ghost" data-tel href="#visit">
+      <svg aria-hidden="true" focusable="false"><use href="#i-phone" /></svg>
+      Call
+    </a>
+  </div>
+
+  <!-- ============================================================
+       Page data. The [BB_...] tokens are filled from environment
+       variables when the site is deployed (tools/apply-env.py) —
+       edit them in GitHub, not here. See site.env.example.
+       Visible copy lives in the HTML above so that search engines
+       and no-JS visitors can read it.
+       ============================================================ -->
   <script>
-    window.PAGE = { shop: "family" };
+    window.PAGE = {
+      whatsapp: "[BB_WHATSAPP]",
+      phone: "[BB_PHONE]",
+      maps: {
+        embed: "[BB_MAPS_EMBED]",
+        directions: "[BB_MAPS_LINK]"
+      },
+      messages: {
+        order: {
+          en: "Hello MancherikalaM BigBazar, I would like to place an order.",
+          /* TODO: verify Malayalam */
+          ml: "നമസ്കാരം മാഞ്ചേരിക്കളം ബിഗ് ബസാർ, എനിക്ക് ഒരു ഓർഡർ നൽകണം."
+        },
+        bulk: {
+          en: "Hello MancherikalaM BigBazar, I would like a quote for bulk pricing.",
+          /* TODO: verify Malayalam */
+          ml: "നമസ്കാരം മാഞ്ചേരിക്കളം ബിഗ് ബസാർ, എനിക്ക് മൊത്ത വില അറിയണം."
+        }
+      }
+    };
   </script>
   <script src="assets/js/main.js" defer></script>
 </body>

@@ -47,7 +47,7 @@ VOID = {
 # set is almost certainly a typo or an invented type (WholesaleStore, say,
 # which looks plausible but does not exist in the schema.org vocabulary).
 SCHEMA_TYPES = {
-    "Organization", "GroceryStore", "Store", "PostalAddress", "GeoCoordinates",
+    "Store", "PostalAddress", "GeoCoordinates",
     "OpeningHoursSpecification", "Place", "AdministrativeArea",
 }
 
@@ -291,8 +291,7 @@ def check(page_path):
 
 
 def main():
-    pages = ["index.html", "supermarket/index.html", "big-bazaar/index.html",
-             "404.html"]
+    pages = ["index.html", "big-bazaar/index.html", "404.html"]
 
     missing = [p for p in pages if not os.path.exists(os.path.join(ROOT, p))]
     if missing:

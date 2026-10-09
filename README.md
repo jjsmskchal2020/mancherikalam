@@ -1,15 +1,19 @@
-# Mancherikalam — shop website
+# MancherikalaM BigBazar — shop website
 
-A small static site for the two family shops in Karukachal, Kottayam district, Kerala:
+The website for **MancherikalaM BigBazar**, the family's wholesale and retail store in
+Karukachal, Kottayam district, Kerala: rice by the sack, oils, flour, spices, frozen foods,
+household and hygiene goods, for homes, caterers, hotels and events.
 
-- **Mancherikalam Supermarket** — everyday groceries and household retail
-- **Mancherikalam Big Bazaar** — wholesale and bulk supply for caterers, hotels and events
+Plain HTML, CSS and vanilla JavaScript. No framework, no npm, no tracking, no cookies. The
+only build step is filling the contact details in from environment variables at deploy time.
 
-Plain HTML, CSS and vanilla JavaScript. No framework, no build step, no npm, no tracking,
-no cookies. Everything is served exactly as it sits in this folder.
-
-**First load of a shop page is about 147 KB** (measured, uncompressed, including webfonts) —
-roughly 29% of the 500 KB budget.
+| Path | What it is |
+|---|---|
+| `index.html` | The whole site — one page, bilingual (English / മലയാളം) |
+| `big-bazaar/index.html` | A redirect to the home page, so old links keep working |
+| `404.html` | Self-contained "page not found" |
+| `assets/` | Stylesheet, script, photos and icons |
+| `tools/` | Python helpers — never served |
 
 ---
 
@@ -19,10 +23,15 @@ roughly 29% of the 500 KB budget.
 python -m http.server 8000
 ```
 
-Then open <http://localhost:8000/>. On Windows the command is `python`, not `python3`.
+Then open <http://localhost:8000/>. Served like this, the contact buttons show
+**"not added yet"** — the details come from environment variables (next section). To preview
+with real values:
 
-The local dev server does **not** serve `404.html` for missing pages — that is GitHub Pages
-behaviour. To preview the 404 page locally, open it directly.
+```sh
+cp site.env.example .env          # then edit .env
+python tools/apply-env.py --out _preview
+python -m http.server 8000 -d _preview
+```
 
 Before committing a change:
 
@@ -32,133 +41,104 @@ python tools/check-site.py
 
 ---
 
-## 1. Content to fill in
+## 1. Contact details — environment variables
 
-Every unknown detail is a visible `[BRACKETED]` token in the page. Search for the token and
-replace it with the real value. **39 distinct tokens, 58 occurrences.**
+Phone, WhatsApp, address, hours, map, GSTIN, FSSAI and the social links are **not written in
+the HTML**. The page carries visible tokens such as `[BB_PHONE]`, and the deploy fills each one
+from a GitHub repository variable of the same name.
 
-### Landing page and both shops
+### Changing a detail
 
-- [ ] `[PINCODE]` — `index.html`, in the organisation JSON-LD
-- [ ] `[ADDRESS - SUPERMARKET]` — in `index.html` **and** `supermarket/index.html`
-- [ ] `[ADDRESS - BIG BAZAAR]` — in `index.html` **and** `big-bazaar/index.html`
-- [ ] `[FACEBOOK URL - SUPERMARKET]`, `[FACEBOOK URL - BIG BAZAAR]`
-- [ ] `[WHATSAPP GROUP LINK - SUPERMARKET]`, `[WHATSAPP GROUP LINK - BIG BAZAAR]`
+1. On GitHub: **Settings ▸ Secrets and variables ▸ Actions ▸ Variables** tab.
+2. **New repository variable** (or edit an existing one). Use exactly the names below.
+3. **Actions ▸ Deploy to GitHub Pages ▸ Run workflow.** Changing a variable does not redeploy
+   on its own.
 
-### Supermarket — `supermarket/index.html`
-
-Contact details live in the `window.PAGE` object at the **bottom** of the file:
-
-- [ ] `[WHATSAPP NUMBER - SUPERMARKET]` — digits only, no `+`, no `91`, no spaces
-- [ ] `[PHONE - SUPERMARKET]` — as you want it displayed; the `tel:` link strips spaces
-- [ ] `[GOOGLE MAPS EMBED URL - SUPERMARKET]` — Google Maps ▸ Share ▸ Embed a map ▸ copy
-      only the `src="..."` URL out of the iframe snippet
-- [ ] `[GOOGLE MAPS LINK - SUPERMARKET]` — the ordinary Share link
-
-In the page body and the JSON-LD block in `<head>`:
-
-- [ ] `[STREET ADDRESS - SUPERMARKET]`, `[PINCODE - SUPERMARKET]`
-- [ ] `[HOURS MON-SAT - SUPERMARKET]`, `[HOURS SUNDAY - SUPERMARKET]` — free text for the
-      table, e.g. `8:00 am – 8:30 pm`
-- [ ] `[OPENS MON-SAT - SUPERMARKET]`, `[CLOSES MON-SAT - SUPERMARKET]`,
-      `[OPENS SUNDAY - SUPERMARKET]`, `[CLOSES SUNDAY - SUPERMARKET]` — JSON-LD only, and
-      these must be 24-hour `HH:MM`, e.g. `08:00` and `20:30`
-- [ ] `[LATITUDE - SUPERMARKET]`, `[LONGITUDE - SUPERMARKET]` — right-click the shop in
-      Google Maps; the coordinates are the first item in the menu
-- [ ] `[FSSAI LICENCE NO. - SUPERMARKET]`, `[GSTIN - SUPERMARKET]`
-
-### Big Bazaar — `big-bazaar/index.html`
-
-The same list with `- BIG BAZAAR` in place of `- SUPERMARKET`.
-
-### What happens until they are filled in
-
-- WhatsApp, Call, Directions and the map render with a dashed outline and the words
-  *"number not added yet"*, and taps are blocked. That is deliberate — a dead tap is worse
-  than a visible gap. It all disappears on its own once the real values are in.
-- Those buttons fall back to linking at the **Visit us** section, which carries the address
-  and phone number as plain text.
-- The structured data will not pass Google's Rich Results Test, because the *values* are
-  placeholders. The JSON itself is valid; only the contents are pending.
-
-**Fill in at least the WhatsApp numbers and the addresses before sharing the link publicly.**
-
----
-
-## 2. Placeholder images
-
-Every image in `assets/img/` is generated by `python tools/make-placeholders.py` and is meant
-to be replaced with a real photo.
-
-| File | Size | Replace with |
+| Variable | Format | Example |
 |---|---|---|
-| `hero-supermarket.svg` | 1200 × 675 (16:9) | Shopfront or interior photo |
-| `hero-big-bazaar.svg` | 1200 × 675 (16:9) | Warehouse / bulk stock photo |
-| `card-supermarket.svg` | 800 × 600 (4:3) | Landing-page card photo |
-| `card-big-bazaar.svg` | 800 × 600 (4:3) | Landing-page card photo |
-| `og-supermarket.png` | 1200 × 630 | Social share image |
-| `og-big-bazaar.png` | 1200 × 630 | Social share image |
-| `og-home.png` | 1200 × 630 | Social share image |
-| `logo-mancherikalam.svg` | 40 × 40 | Family logo, if you have one |
-| `favicon.svg` | square | Browser-tab icon |
-| `apple-touch-icon.png` | 180 × 180 | Home-screen icon |
+| `BB_PHONE` | As you want it displayed | `+91 98765 43210` |
+| `BB_WHATSAPP` | 10-digit mobile; `+91`, spaces and dashes are tidied | `9876543210` |
+| `BB_STREET_ADDRESS` | Street line only — Karukachal, Kottayam, Kerala are added | `Main Road, near the junction` |
+| `BB_PINCODE` | 6 digits | `686540` |
+| `BB_HOURS_MON_SAT` | 24-hour `HH:MM-HH:MM`, or `closed` | `08:30-20:00` |
+| `BB_HOURS_SUN` | Same | `closed` |
+| `BB_LATITUDE`, `BB_LONGITUDE` | Right-click the shop in Google Maps; first menu item | `9.5077`, `76.6392` |
+| `BB_MAPS_LINK` | Google Maps ▸ Share ▸ Send a link | `https://maps.app.goo.gl/…` |
+| `BB_MAPS_EMBED` | Google Maps ▸ Share ▸ Embed a map ▸ only the `src="…"` URL | `https://www.google.com/maps/embed?pb=…` |
+| `BB_GSTIN`, `BB_FSSAI` | As printed on the certificate | |
+| `BB_FACEBOOK_URL`, `BB_WHATSAPP_GROUP` | Full URLs | |
 
-The generated PNGs carry **English labels only**. Pillow on this machine is built without
-libraqm, so it cannot shape Malayalam — the glyphs would come out broken and unjoined. This
-affects the generated placeholders only; the website itself renders Malayalam properly with
-a real webfont.
+The hours are written once and used twice: `08:30-20:00` shows as *8:30 am – 8:00 pm* in the
+table and goes into the structured data for Google as `08:30` / `20:00`.
 
-### Swapping in a real photo
+### What happens while something is unset
 
-Export at the size in the table, save **two** files (a WebP and a JPEG fallback), then
-replace the `<img>` with:
+Its token stays on the page, and the matching WhatsApp / Call / Directions / map / social
+button renders with a dashed outline and the words *"not added yet"*, with taps blocked — a
+visible gap is better than a dead tap. It clears itself on the next deploy after the variable
+is set. The deploy log lists which variables were filled and which are still unset.
 
-```html
-<picture>
-  <source type="image/webp" srcset="../assets/img/hero-supermarket.webp">
-  <img src="../assets/img/hero-supermarket.jpg" width="1200" height="675"
-       decoding="async" alt="Describe what is actually in the photo">
-</picture>
-```
+**Set at least `BB_PHONE`, `BB_WHATSAPP` and the address before sharing the link publicly.**
 
-Keep the `width` and `height` attributes — they stop the page jumping about while the image
-loads. Only add the `<source>` line once the `.webp` really exists; pointing at a missing
-file costs a wasted request on every visit.
+### Why tokens instead of editing the HTML
 
-Social share images (`og-*.png`) must stay PNG or JPEG. Several scrapers do not read WebP,
-and none read SVG.
+Values are filled into the HTML itself at deploy time, not fetched by JavaScript, so search
+engines and Google's business listing read the real address and hours. `apply-env.py` escapes
+each value for where it lands — HTML-escaped in the page, JSON-escaped inside the structured
+data and the `window.PAGE` script — so a URL with `&` in it works in both.
 
 ---
 
-## 3. Malayalam to verify
+## 2. Photos
 
-Translations are marked in the HTML with `<!-- TODO: verify Malayalam -->`. These are the
-ones that need a native eye — mostly literal translations where the natural Kerala
-shop-floor term is probably better:
+All photos are the shop's own, in `assets/img/`, as WebP. No staff or customers appear — photos
+with people were left out or cropped.
 
-| English | Used | Why it needs checking |
+| Files | Size | Used for |
 |---|---|---|
-| Mancherikalam | മാഞ്ചേരിക്കളം | The family name — spell it the way the family writes it |
-| Household | വീട്ടുസാധനങ്ങൾ | Literal; is this what customers actually say? |
-| Personal Care | വ്യക്തിഗത പരിചരണം | A calque from English |
-| Bulk Rice | മൊത്തമായി അരി | "bulk" phrasing in a trade context |
-| Oils (bulk), Spices (bulk) | എണ്ണ (മൊത്തം), മസാലകൾ (മൊത്തം) | Same |
-| Catering Supplies | കാറ്ററിംഗ് സാമഗ്രികൾ | Transliterated "catering" |
-| Disposables | ഡിസ്പോസിബിൾ സാമഗ്രികൾ | Transliterated |
-| Cleaning & Hygiene | ശുചീകരണ സാമഗ്രികൾ | Narrower in Malayalam than in English |
-| Pulses & Flour | പയറുവർഗ്ഗങ്ങളും മാവും | Check the compound reads naturally |
-| Taglines, About text, button labels | — | Whole sentences; read them aloud |
+| `hero-1..3.webp` | 540 × 720 | Hero mosaic |
+| `sign.webp` | 650 × 284 | The lit sign, in About |
+| `cat-*.webp` | 720 × 540 | The twelve product cards |
+| `rice-1..4.webp`, `frozen-1..3.webp` | 480 × 480 | Rice wall and frozen foods sections |
+| `frozen-sign.webp` | 720 × 205 | Frozen foods signboard |
+| `gal-N.webp` / `gal-N-lg.webp` | 480 × 600 / 720 × 1280 | Gallery thumbnail / full size |
+| `og-image.jpg` | 1200 × 630 | Social share image (must stay JPEG or PNG) |
+| `favicon.svg`, `apple-touch-icon.png` | — | Browser tab and home-screen icons |
 
-Confident and **not** marked: അരിയും ധാന്യങ്ങളും (Rice & Grains), മസാലകൾ (Spices),
-എണ്ണകൾ (Oils), പലഹാരങ്ങൾ (Snacks), പാനീയങ്ങൾ (Beverages), പഴങ്ങളും പച്ചക്കറികളും
-(Fruits & Vegetables).
-
-The prefilled WhatsApp greetings are in the `window.PAGE` object at the bottom of each shop
-page and also need checking.
+To swap a photo, export it at the same size and name, and keep the `width`/`height` attributes
+in the HTML — they stop the page jumping while images load. Below-the-fold images are
+`loading="lazy"`; the full-size gallery photos load only when tapped.
 
 ---
 
-## 4. Deploy to GitHub Pages
+## 3. Typography — matching the signboard
+
+The signboard sets **"MancherikalaM"** in a rounded geometric sans and **"BIGBAZAR"** in a heavy
+geometric sans. The site uses the closest open fonts: **Quicksand 700** and **Montserrat 800**
+(for headings too). Body text is Nunito Sans; Malayalam is Noto Sans Malayalam.
+
+The wordmark is HTML and CSS, not an image — the golden arc and wheat sprig are inline SVG
+(`#i-arc`, `#i-wheat` in the sprite at the top of `index.html`) — so it stays sharp at any size.
+If the sign-maker can supply the exact font files, put them in `assets/fonts/`, add
+`@font-face` rules at the top of `styles.css`, and point `--rounded` and `--display` at them.
+
+---
+
+## 4. Content to verify
+
+- **Malayalam.** Translations are marked `<!-- TODO: verify Malayalam -->`. Read them aloud;
+  most are literal and a natural shop-floor phrase is probably better. The prefilled WhatsApp
+  greetings in `window.PAGE` at the bottom of `index.html` need checking too.
+- **"Maccam"** in the frozen-foods brand list is spelled as on the signboard — confirm it.
+- **Brand lists** on the product cards, rice wall and brand strip were read off the photos.
+  Remove any you no longer stock. The site uses brand names only, no logos.
+- **Pack sizes** — the rice note says 25, 30 and 50 kg sacks, as printed on the bags.
+- **Delivery** is deliberately not mentioned. If the shop delivers, add it to the "For
+  businesses" steps.
+
+---
+
+## 5. Deploy to GitHub Pages
 
 This site lives **alongside** the existing portfolio at `jakee4488.github.io`, not inside it.
 They are separate repositories and do not conflict:
@@ -175,15 +155,16 @@ They are separate repositories and do not conflict:
    git remote add origin https://github.com/Jakee4488/mancherikalam.git
    git push -u origin main
    ```
-3. On GitHub: **Settings ▸ Pages ▸ Build and deployment**. Set *Source* to **Deploy from a
-   branch**, branch `main`, folder `/ (root)`. Save.
+3. On GitHub: **Settings ▸ Pages ▸ Build and deployment**. Set *Source* to **GitHub
+   Actions**. This matters: the workflow in `.github/workflows/deploy.yml` is what fills the
+   contact details in. "Deploy from a branch" would publish the raw `[BB_...]` tokens.
 4. Wait a minute, then open `https://jakee4488.github.io/mancherikalam/`.
 
 `.nojekyll` is already present, which stops GitHub running Jekyll over the files.
 
 ---
 
-## 5. Moving to a different address later
+## 6. Moving to a different address later
 
 All internal links and asset paths are **relative**, so the pages work from a subfolder, from
 a domain root, or from any other host without edits. The only absolute URLs are the ones that
@@ -204,8 +185,8 @@ python tools/set-domain.py https://yourdomain.in
 | Another host, under a subfolder | `python tools/set-domain.py https://example.com/shops --no-cname` |
 
 It updates every canonical, `og:url`, `og:image`, `twitter:image`, JSON-LD
-`url`/`@id`/`image`/`logo`, the three `sitemap.xml` entries, the `Sitemap:` line in
-`robots.txt`, and the three root-absolute links in `404.html`. With a custom domain it also
+`url`/`@id`/`image`/`logo`, the `sitemap.xml` entry, the `Sitemap:` line in
+`robots.txt`, and the root-absolute link in `404.html`. With a custom domain it also
 writes `CNAME`; `--no-cname` removes it instead. The change is reversible — running it back
 gives a byte-for-byte identical tree.
 
@@ -220,7 +201,7 @@ real domain, or you can rename the file yourself.
 
 ---
 
-## 6. DNS for a custom domain
+## 7. DNS for a custom domain
 
 At your registrar, for the apex domain (`yourdomain.in`, no `www`):
 
@@ -260,141 +241,73 @@ Then:
 
 ---
 
-## 7. Editing the site
+## 8. Editing the site
 
-### Change some text
+### Text
 
-Visible copy is in the HTML, not in JavaScript. Every bilingual string is a pair:
+Visible copy is in `index.html`. Every bilingual string is a pair:
 
 ```html
 <h2 class="bi">
-  <span class="bi-en">What we sell</span>
-  <span class="bi-ml" lang="ml">ഞങ്ങൾ വിൽക്കുന്നത്</span>
+  <span class="bi-en">Brands on our shelves</span>
+  <span class="bi-ml" lang="ml">ഞങ്ങളുടെ ഷെൽഫുകളിലെ ബ്രാൻഡുകൾ</span>
 </h2>
 ```
 
 Edit **both** spans, keep English first in the markup, and keep `lang="ml"` on the Malayalam
-one. English-first-in-markup is what lets the page read correctly with JavaScript and CSS
-switched off; the language toggle only reorders them visually.
+one. The language toggle only reorders them visually.
 
-### Change a phone or WhatsApp number
+### A product card
 
-Once, in the `window.PAGE` object at the bottom of the shop page. Every WhatsApp button, Call
-button and `tel:` link on that page is built from it.
+Copy one `<li>` inside `<ul class="photo-cards">`, then change the image, the alt text, the two
+labels and the brand line. Twelve cards fill the grid evenly at 2, 3 and 4 columns.
 
-### Add a category
+### Brands
 
-Copy one `<li class="cat">` block and change the icon reference and the two labels:
+The rice wall, frozen foods and "Brands on our shelves" lists are plain `<li class="chip">`
+items — add or delete lines.
 
-```html
-<li class="cat">
-  <span class="cat-icon"><svg aria-hidden="true" focusable="false"><use href="#i-grain" /></svg></span>
-  <span class="bi">
-    <span class="bi-en">Rice &amp; Grains</span>
-    <span class="bi-ml" lang="ml">അരിയും ധാന്യങ്ങളും</span>
-  </span>
-</li>
-```
+### Colours
 
-Icons come from the `<svg>` sprite near the top of the same file. To add one, copy an existing
-`<symbol>`, give it a new `id`, and swap the paths. Keep `viewBox="0 0 24 24"` and the stroke
-attributes **on the `<symbol>` itself** — a `<use>` element inherits styling from where it is
-referenced, not from where the symbol sits, so a shared wrapper would be silently ignored.
-
-The grid is 2 columns on a phone, 3 from 600px, 4 from 900px. Any count from 6 to 10 works;
-8 avoids leaving an orphan card on a row.
-
-### Change a shop's colour
-
-In `assets/css/styles.css`, near the top:
-
-```css
-[data-shop="supermarket"] {
-  --accent: #2f7d32;
-  --accent-strong: #1f5e24;
-  --accent-wash: #e8f1e6;
-  --accent-ring: #3f9c43;
-}
-```
-
-There is a matching block inside the `@media (prefers-color-scheme: dark)` section. If you
-change a colour, re-check contrast — every current pairing clears WCAG AA, the tightest at
-4.80:1. Also update `<meta name="theme-color">` in that page's `<head>`.
+Tokens at the top of `assets/css/styles.css`. `--accent` (orange) is for text and buttons and
+is contrast-checked; `--sign-wall` and `--sign-gold` are the sign's colours, used for the
+header, hero and footer in both light and dark mode. Re-check contrast if you change
+`--accent`, and update `<meta name="theme-color">`.
 
 ---
 
-## 8. How it works
+## 9. How it works
 
-Two attributes on `<html>` drive everything, so one stylesheet themes every page:
-
-- `data-shop="supermarket|big-bazaar|family"` selects the accent colour
-- `data-lang="en|ml"` selects which script leads
-
-**The language toggle is pure CSS.** JavaScript only flips `data-lang`; the reordering and
-resizing is done with flexbox `order` and `font-size`. Nothing is ever hidden — both languages
-stay on screen and the toggle changes which one is primary. A three-line inline script in each
-`<head>` applies the stored choice before first paint, so the order never visibly flips on
-load. The choice is kept in `localStorage` inside a `try/catch`, so private browsing or
-blocked storage degrades to the default rather than throwing.
-
-**The map is click-to-load.** Google's embed is a third party; not requesting it until someone
-asks keeps the promise that the page sets no cookies and calls nothing out on its own.
-`loading="lazy"` is set on the iframe as well.
-
-**Only one Malayalam font weight is loaded** (Noto Sans Malayalam 400). Asking for a second
-weight makes Google serve an 89 KB variable font instead of a 24 KB static one, and `.bi-ml`
-is pinned to `font-weight: 400` so a heading can never make the browser synthesise bold —
-fake bold smears the script's conjuncts and vowel signs.
-
-**`404.html` is self-contained** — no stylesheet, script, font or image. GitHub Pages serves
-it from the site root no matter how deep the bad URL was, so relative paths would resolve
-against the wrong folder. Its three links are the only root-absolute paths in the site, and
-`tools/set-domain.py` maintains them.
+- **`data-lang="en|ml"`** on `<html>` selects which script leads. The toggle is pure CSS;
+  JavaScript only flips the attribute and remembers the choice in `localStorage` (inside a
+  `try/catch`). A three-line inline script applies it before first paint.
+- **Contact links** (WhatsApp, Call, Directions, map) are built by `assets/js/main.js` from the
+  `window.PAGE` object, so the prefilled WhatsApp message follows the reader's language.
+- **The map is click-to-load**, so the page calls no third party until someone asks.
+- **The gallery** is plain links to the full photos; `main.js` upgrades a tap to a `<dialog>`
+  lightbox (Esc, the close button or a tap outside closes it).
+- **Only one Malayalam font weight is loaded**, and `.bi-ml` is pinned to 400 so headings never
+  make the browser synthesise a smeared fake bold.
+- **`404.html` is self-contained** — GitHub Pages serves it from the site root whatever the
+  URL, so it uses no stylesheet or images, and its one link is root-absolute.
 
 ---
 
-## 9. Tools
+## 10. Tools
 
-Plain Python 3, standard library only (except Pillow for the PNGs). Nothing in `tools/` is
-fetched by a page; the folder can be deleted without affecting the site.
+Plain Python 3, standard library only. Nothing in `tools/` is served.
 
 | Command | What it does |
 |---|---|
-| `python tools/check-site.py` | Structural checks — run before every commit |
+| `python tools/check-site.py` | Structural checks — run before every commit (CI runs it too) |
+| `python tools/apply-env.py _site` | Fill contact details into a staged copy (the deploy runs this) |
+| `python tools/apply-env.py --out _preview` | Copy the site to `_preview/` and fill it from `.env` |
 | `python tools/set-domain.py <url>` | Repoint the site at a new base URL |
-| `python tools/make-placeholders.py` | Regenerate the placeholder artwork |
 
 `check-site.py` catches root-absolute paths, links and assets that do not resolve, `#anchors`
-with no matching `id`, duplicate `id`s, unbalanced tags, `<img>` without `alt`/`width`/
-`height`, Malayalam spans missing `lang="ml"`, JSON-LD that is not valid JSON or that uses a
-schema.org type that does not exist, and pages over budget. It also counts the remaining
-`[PLACEHOLDER]` tokens.
-
-### Checked by hand, not by the tools
-
-- **Rendering at 375px and 1280px.** Worth a minute in Chrome DevTools. The CSS is
-  overflow-proofed by construction — every grid track is `minmax(0, 1fr)`, text has
-  `overflow-wrap: break-word`, media is capped at `max-width: 100%`, the one wide table sits
-  in an `overflow-x: auto` wrapper, and there are no fixed pixel widths outside small icons.
-- **Full HTML validation.** Run the live URL through <https://validator.w3.org/> after the
-  first deploy.
-- **Structured data.** <https://search.google.com/test/rich-results> — this will report errors
-  on placeholder *values* until section 1 is complete.
-
----
-
-## 10. Phase 2 — the ordering app
-
-Nothing here needs restructuring to add ordering:
-
-- Each shop's data is already isolated in one `window.PAGE` object per page.
-- Categories are plain markup inside sections with stable `id`s, so they can become links
-  into a catalogue.
-- Theming is attribute-driven, so a new page only needs `data-shop="..."`.
-- `main.js` is written as independent blocks, with room in `assets/js/` for more.
-
-The obvious next step is a `products/` folder with a JSON file per shop, rendered into the
-existing `.cats` grid — still with no build step.
+with no matching `id`, duplicate `id`s, unbalanced tags, `<img>` without `alt`/`width`/`height`,
+Malayalam spans missing `lang="ml"`, invalid JSON-LD, and pages over budget. It also counts the
+`[BB_...]` tokens — in the source these are expected; the deploy fills them.
 
 ---
 

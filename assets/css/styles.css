@@ -1,16 +1,18 @@
 @charset "UTF-8";
 
 /* ============================================================
-   Mancherikalam — two family shops, Karukachal, Kottayam
-   Direction: a warm paper shopfront. Generous tap targets,
-   bilingual by default, readable on a cheap phone in sunlight.
+   MancherikalaM BigBazar — wholesale & retail, Karukachal
+   Direction: the shop's own lit sign. A dark slatted wall, a
+   golden arc, white geometric lettering — set against a warm
+   paper page for everything below the hero. Generous tap
+   targets, bilingual by default, readable on a cheap phone.
 
-   One stylesheet themes every page. The accent comes from
-   data-shop on <html>; the bilingual layout comes from
-   data-lang on <html>. No page-specific CSS anywhere.
+   Lettering follows the signboard: Quicksand for the rounded
+   "MancherikalaM", Montserrat ExtraBold for "BIGBAZAR" and the
+   headings. The bilingual layout comes from data-lang on <html>.
    ============================================================ */
 
-/* ---- base tokens ---- */
+/* ---- tokens ---- */
 
 :root {
   --bg: #fbf7f0;
@@ -24,17 +26,33 @@
   --text-dim: #5d5247;
   --muted: #756859;
 
+  /* Brand accent, contrast-checked: 4.98:1 on --bg, 5.32:1 under white. */
+  --accent: #b8470d;
+  --accent-strong: #8f3609;
+  --accent-wash: #f8e9df;
+  --accent-ring: #d4650f;
   --on-accent: #ffffff;
+
+  /* The sign: a near-black slatted wall and a golden arc. These stay the
+     same in light and dark mode — the hero is always "the sign". */
+  --sign-wall: #1c1714;
+  --sign-wall-2: #241d19;
+  --sign-gold: #f3a712;
+  --sign-ink: #ffffff;
+  --sign-dim: #e2d6c8;
+
   --whatsapp: #1fa855;
 
   --radius: 12px;
   --radius-lg: 20px;
-  --shell: 1120px;
+  --shell: 1180px;
   --tap: 48px;
-  --header-h: 60px;
+  --header-h: 64px;
 
   --sans: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     system-ui, sans-serif;
+  --display: "Montserrat", "Nunito Sans", -apple-system, "Segoe UI", sans-serif;
+  --rounded: "Quicksand", "Nunito Sans", -apple-system, "Segoe UI", sans-serif;
   --ml: "Noto Sans Malayalam", "Nirmala UI", Manjari, Meera, AnjaliOldLipi,
     sans-serif;
 
@@ -45,30 +63,6 @@
 
   --shadow: 0 1px 2px rgba(42, 33, 24, .06), 0 6px 18px rgba(42, 33, 24, .07);
   --shadow-lift: 0 2px 4px rgba(42, 33, 24, .08), 0 14px 32px rgba(42, 33, 24, .12);
-}
-
-/* Per-shop accents. Every pair is contrast-checked against --bg
-   and against --on-accent at WCAG AA for normal-size text. */
-
-[data-shop="family"] {
-  --accent: #7a3b26;         /* 7.93:1 on --bg */
-  --accent-strong: #5d2c1c;
-  --accent-wash: #f3e7e0;
-  --accent-ring: #a65a3d;
-}
-
-[data-shop="supermarket"] {
-  --accent: #2f7d32;         /* 4.80:1 on --bg, 5.12:1 under white */
-  --accent-strong: #1f5e24;
-  --accent-wash: #e8f1e6;
-  --accent-ring: #3f9c43;
-}
-
-[data-shop="big-bazaar"] {
-  --accent: #b8470d;         /* 4.98:1 on --bg, 5.32:1 under white */
-  --accent-strong: #8f3609;
-  --accent-wash: #f8e9df;
-  --accent-ring: #d4650f;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -85,33 +79,20 @@
     --muted: #9a8d7e;
 
     /* In dark mode the accent is a light colour, so ink on top of it
-       flips to the page ground instead of white. */
+       flips to the page ground instead of white. 7.87:1 on --bg. */
+    --accent: #ff8a3d;
+    --accent-strong: #ffa366;
+    --accent-wash: #2a1c12;
+    --accent-ring: #ff8a3d;
     --on-accent: #171310;
+
+    --sign-wall: #120e0c;
+    --sign-wall-2: #1a1411;
+
     --whatsapp: #4ddd8a;
 
     --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 6px 18px rgba(0, 0, 0, .45);
     --shadow-lift: 0 2px 4px rgba(0, 0, 0, .45), 0 14px 32px rgba(0, 0, 0, .55);
-  }
-
-  [data-shop="family"] {
-    --accent: #d98d6a;       /* 7.01:1 on --bg */
-    --accent-strong: #eda986;
-    --accent-wash: #2a1f19;
-    --accent-ring: #d98d6a;
-  }
-
-  [data-shop="supermarket"] {
-    --accent: #6cc46f;       /* 8.58:1 on --bg */
-    --accent-strong: #8ad88c;
-    --accent-wash: #1a241b;
-    --accent-ring: #6cc46f;
-  }
-
-  [data-shop="big-bazaar"] {
-    --accent: #ff8a3d;       /* 7.87:1 on --bg */
-    --accent-strong: #ffa366;
-    --accent-wash: #2a1c12;
-    --accent-ring: #ff8a3d;
   }
 }
 
@@ -166,10 +147,11 @@ a:hover {
 h1,
 h2,
 h3 {
-  line-height: 1.25;
   margin: 0;
-  font-weight: 700;
-  letter-spacing: -.01em;
+  font-family: var(--display);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -.015em;
 }
 
 p {
@@ -184,6 +166,10 @@ ul {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+figure {
+  margin: 0;
 }
 
 button {
@@ -251,10 +237,11 @@ button {
 .bi-ml {
   font-family: var(--ml);
   line-height: var(--ml-line);
-  /* Only the 400 weight of Noto Sans Malayalam is loaded. Inheriting 700
+  /* Only the 400 weight of Noto Sans Malayalam is loaded. Inheriting 800
      from a heading would make the browser synthesise bold, which smears
      the script's conjuncts and vowel signs. */
   font-weight: 400;
+  letter-spacing: 0;
 }
 
 /* English leads (default) */
@@ -300,11 +287,13 @@ button {
   border-left: 3px solid var(--line);
 }
 
-/* Inside a filled button the secondary line must stay legible,
-   so it keeps the button's own ink rather than --text-dim. */
+/* Inside a filled button, and on the dark sign, the secondary line must
+   stay legible, so it keeps the surrounding ink rather than --text-dim. */
 
 [data-lang="en"] .btn .bi-ml,
-[data-lang="ml"] .btn .bi-en {
+[data-lang="ml"] .btn .bi-en,
+[data-lang="en"] .hero .bi-ml,
+[data-lang="ml"] .hero .bi-en {
   color: inherit;
   opacity: .82;
 }
@@ -319,7 +308,7 @@ button {
 }
 
 .section {
-  padding-block: 3rem;
+  padding-block: 3.25rem;
 }
 
 .section--wash {
@@ -330,31 +319,97 @@ button {
   background: var(--bg-soft);
 }
 
-/* --accent is tuned for contrast against --bg and against --on-accent. On
-   --accent-wash it lands at 4.43:1 for the supermarket green, just under
-   AA, so accent-coloured TEXT on a wash uses the darker --accent-strong.
-   Icons and borders on a wash are non-text and keep --accent. */
+/* --accent on --accent-wash sits just under AA for small text, so
+   accent-coloured TEXT on a wash uses the darker --accent-strong. */
 
 .section--wash .eyebrow {
   color: var(--accent-strong);
 }
 
 .section-head {
-  margin-bottom: 1.75rem;
+  max-width: 44rem;
+  margin-bottom: 2rem;
 }
 
 .section-head h2 {
-  font-size: clamp(1.45rem, 5.5vw, 2rem);
+  font-size: clamp(1.5rem, 5.6vw, 2.25rem);
+}
+
+.section-lead {
+  margin-top: .9rem;
+  color: var(--text-dim);
 }
 
 .eyebrow {
-  display: inline-block;
-  margin-bottom: .5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  margin-bottom: .6rem;
   font-size: .76rem;
   font-weight: 700;
   letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--accent);
+}
+
+/* A short golden bar before each eyebrow echoes the arc on the sign. */
+
+.eyebrow::before {
+  content: "";
+  width: 1.6rem;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--sign-gold);
+}
+
+/* ---- wordmark (the sign, in HTML) ---- */
+
+.wordmark {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: .5em;
+  color: inherit;
+  line-height: 1;
+}
+
+/* The arc stretches to the word's width; its stroke is non-scaling, so the
+   thickness is set here in px and inherited into the <use> shadow tree. */
+
+.wordmark-arc {
+  position: absolute;
+  top: 0;
+  left: -.5em;
+  width: calc(100% + 1em);
+  height: 1.05em;
+  color: var(--sign-gold);
+  stroke-width: 3px;
+  overflow: visible;
+}
+
+.wordmark-wheat {
+  position: absolute;
+  top: -.62em;
+  right: 16%;
+  width: .8em;
+  height: .8em;
+  color: var(--sign-gold);
+}
+
+.wordmark-top {
+  font-family: var(--rounded);
+  font-weight: 700;
+  font-size: 1em;
+  letter-spacing: .005em;
+}
+
+.wordmark-bottom {
+  margin-top: .08em;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.32em;
+  letter-spacing: .02em;
 }
 
 /* ---- header ---- */
@@ -368,43 +423,22 @@ button {
   align-items: center;
   gap: .6rem;
   padding: .45rem 1.15rem;
-  background: var(--bg);
-  border-bottom: 1px solid var(--line);
-  box-shadow: 0 1px 0 var(--line-soft);
+  background: var(--sign-wall);
+  color: var(--sign-ink);
+  border-bottom: 3px solid var(--sign-gold);
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: .5rem;
   min-width: 0;
-  color: var(--text);
+  color: var(--sign-ink);
   text-decoration: none;
-  font-weight: 700;
-  font-size: clamp(.98rem, 4vw, 1.12rem);
-  letter-spacing: -.015em;
+  font-size: .95rem;
 }
 
-.brand img {
-  width: 30px;
-  height: 30px;
-  flex: none;
-  border-radius: 50%;
-}
-
-.brand-text {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.brand-sub {
-  display: block;
-  font-size: .68em;
-  font-weight: 700;
-  color: var(--accent);
-  letter-spacing: .02em;
-  line-height: 1.2;
+.brand:hover {
+  color: var(--sign-ink);
 }
 
 .topbar-end {
@@ -420,8 +454,8 @@ button {
   display: flex;
   flex: none;
   padding: 3px;
-  background: var(--surface-2);
-  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, .08);
+  border: 1px solid rgba(255, 255, 255, .18);
   border-radius: 999px;
 }
 
@@ -433,7 +467,7 @@ button {
   border-radius: 999px;
   font-size: .82rem;
   font-weight: 700;
-  color: var(--text-dim);
+  color: var(--sign-dim);
   cursor: pointer;
   white-space: nowrap;
 }
@@ -444,8 +478,8 @@ button {
 }
 
 .lang-btn[aria-pressed="true"] {
-  background: var(--accent);
-  color: var(--on-accent);
+  background: var(--sign-gold);
+  color: var(--sign-wall);
 }
 
 /* ---- nav ---- */
@@ -459,7 +493,7 @@ button {
   flex: none;
   padding: 0;
   background: none;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(255, 255, 255, .22);
   border-radius: var(--radius);
   cursor: pointer;
 }
@@ -468,7 +502,7 @@ button {
   display: block;
   width: 20px;
   height: 2px;
-  background: var(--text);
+  background: var(--sign-ink);
   border-radius: 2px;
 }
 
@@ -481,8 +515,8 @@ button {
   display: none;
   flex-direction: column;
   padding: .5rem 1.15rem 1rem;
-  background: var(--bg);
-  border-bottom: 1px solid var(--line);
+  background: var(--sign-wall);
+  border-bottom: 3px solid var(--sign-gold);
   box-shadow: var(--shadow);
 }
 
@@ -495,8 +529,8 @@ button {
   align-items: center;
   min-height: var(--tap);
   padding: .4rem .2rem;
-  border-bottom: 1px solid var(--line-soft);
-  color: var(--text);
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
+  color: var(--sign-ink);
   font-weight: 700;
   text-decoration: none;
 }
@@ -506,7 +540,7 @@ button {
 }
 
 .nav a:hover {
-  color: var(--accent);
+  color: var(--sign-gold);
 }
 
 /* ---- buttons ---- */
@@ -558,8 +592,28 @@ button {
   color: var(--accent);
 }
 
-.btn--block {
-  width: 100%;
+/* On the dark sign: gold fill with wall-coloured ink (9:1), and an
+   outlined white button beside it. */
+
+.btn--gold {
+  background: var(--sign-gold);
+  color: var(--sign-wall);
+}
+
+.btn--gold:hover {
+  background: #ffbd3d;
+  color: var(--sign-wall);
+}
+
+.btn--outline-light {
+  background: transparent;
+  border-color: rgba(255, 255, 255, .45);
+  color: var(--sign-ink);
+}
+
+.btn--outline-light:hover {
+  border-color: var(--sign-gold);
+  color: var(--sign-gold);
 }
 
 .btn-stack {
@@ -569,9 +623,9 @@ button {
   margin-top: 1.5rem;
 }
 
-/* A control whose underlying value in window.PAGE is still a [PLACEHOLDER]
-   is flagged by main.js rather than left to produce a dead tap. All of this
-   disappears by itself the moment the real numbers and URLs are filled in. */
+/* A control whose underlying value is still a [PLACEHOLDER] is flagged by
+   main.js rather than left to produce a dead tap. All of this disappears by
+   itself once the deploy fills the environment variables in. */
 
 [data-placeholder] {
   border-style: dashed !important;
@@ -582,7 +636,7 @@ button {
 }
 
 [data-placeholder]::after {
-  content: " — number not added yet";
+  content: " — not added yet";
   font-size: .78em;
   font-weight: 700;
   opacity: .85;
@@ -599,34 +653,69 @@ button {
   content: none;
 }
 
-/* ---- hero ---- */
+/* ============================================================
+   Hero — the lit sign
+   ============================================================ */
 
 .hero {
-  padding-block: 1.75rem 2.5rem;
-}
-
-.hero-media {
-  margin-bottom: 1.5rem;
-  border-radius: var(--radius-lg);
+  position: relative;
   overflow: hidden;
-  box-shadow: var(--shadow);
+  padding-block: 2.25rem 2.75rem;
+  color: var(--sign-ink);
+  /* Vertical slats like the wall behind the real sign, with a warm glow
+     where the arc lights it up. */
+  background:
+    radial-gradient(ellipse 70% 55% at 22% 18%, rgba(243, 167, 18, .2), transparent 70%),
+    repeating-linear-gradient(90deg, transparent 0 14px, rgba(255, 255, 255, .035) 14px 16px),
+    linear-gradient(180deg, var(--sign-wall-2), var(--sign-wall));
 }
 
-.hero-media img {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
+.hero-inner {
+  display: grid;
+  gap: 2rem;
 }
 
-.hero h1 {
-  font-size: clamp(1.8rem, 7.5vw, 3rem);
+.hero-sign {
+  font-size: clamp(1.9rem, 9.5vw, 3.6rem);
+  margin-bottom: 1.25rem;
+}
+
+.hero-sign {
+  padding: .45em .5em 0;
+}
+
+.hero-sign .wordmark-arc {
+  stroke-width: 7px;
+}
+
+.footer-brand .wordmark-arc {
+  stroke-width: 3.5px;
+}
+
+.brand .wordmark,
+.footer-brand .wordmark {
+  margin: .35em .5em 0;
+}
+
+.hero .eyebrow {
+  color: var(--sign-gold);
 }
 
 .hero-tagline {
-  margin-top: .9rem;
-  font-size: clamp(1.02rem, 4.2vw, 1.2rem);
-  color: var(--text-dim);
-  font-weight: 400;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(1.25rem, 5vw, 1.75rem);
+  line-height: 1.25;
+}
+
+.hero-tagline .bi-ml {
+  font-family: var(--ml);
+}
+
+.hero-lead {
+  margin-top: 1rem;
+  max-width: 34rem;
+  color: var(--sign-dim);
 }
 
 .hero-aside {
@@ -642,140 +731,305 @@ button {
   align-items: center;
   gap: .4rem;
   min-height: 44px;
+  color: var(--sign-ink);
   text-decoration: none;
 }
 
 .hero-aside a:hover {
-  text-decoration: underline;
+  color: var(--sign-gold);
 }
 
-/* ---- landing: shop chooser ---- */
+/* The aside links are plain text, not buttons, so the placeholder state
+   needs no box — only the note. */
 
-.chooser {
+.hero-aside [data-placeholder] {
+  border: 0 !important;
+  background: none !important;
+  color: var(--sign-dim) !important;
+}
+
+/* Three portrait photos, staggered like stacked sacks. */
+
+.mosaic {
   display: grid;
-  gap: 1.5rem;
-  padding-block: 2rem 3rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .6rem;
+  align-items: start;
 }
 
-.shop-card {
+.mosaic img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .45);
+}
+
+.mosaic img:nth-child(2) {
+  margin-top: 1.5rem;
+}
+
+.mosaic img:nth-child(3) {
+  margin-top: .6rem;
+}
+
+/* ---- feature strip ---- */
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .7rem;
+  margin-top: 2.25rem;
+}
+
+.feature {
   display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow);
-  transition: transform .15s ease, box-shadow .15s ease;
+  align-items: center;
+  gap: .7rem;
+  min-width: 0;
+  padding: .8rem .9rem;
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: var(--radius);
+  font-size: .92rem;
+  font-weight: 700;
+  line-height: 1.3;
 }
 
-.shop-card:hover {
-  transform: translateY(-3px);
+.feature svg {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  color: var(--sign-gold);
+}
+
+/* ============================================================
+   About
+   ============================================================ */
+
+.about {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+}
+
+.about-sign {
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--sign-wall);
   box-shadow: var(--shadow-lift);
 }
 
-/* Each card carries its own shop's accent on the family-themed page. */
-
-.shop-card--supermarket {
-  --accent: #2f7d32;
-  --accent-strong: #1f5e24;
-  --accent-wash: #e8f1e6;
-  --accent-ring: #3f9c43;
-}
-
-.shop-card--big-bazaar {
-  --accent: #b8470d;
-  --accent-strong: #8f3609;
-  --accent-wash: #f8e9df;
-  --accent-ring: #d4650f;
-}
-
-@media (prefers-color-scheme: dark) {
-  .shop-card--supermarket {
-    --accent: #6cc46f;
-    --accent-strong: #8ad88c;
-    --accent-wash: #1a241b;
-    --accent-ring: #6cc46f;
-  }
-
-  .shop-card--big-bazaar {
-    --accent: #ff8a3d;
-    --accent-strong: #ffa366;
-    --accent-wash: #2a1c12;
-    --accent-ring: #ff8a3d;
-  }
-}
-
-.shop-card img {
+.about-sign img {
   width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  border-bottom: 4px solid var(--accent);
 }
 
-.shop-card-body {
+.about-sign figcaption {
+  padding: .7rem 1rem;
+  font-size: .85rem;
+  color: var(--sign-dim);
+}
+
+.serve {
   display: flex;
-  flex: 1;
-  flex-direction: column;
-  gap: .9rem;
-  padding: 1.4rem 1.25rem 1.5rem;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-top: 1.5rem;
 }
 
-.shop-card h2 {
-  font-size: clamp(1.3rem, 5vw, 1.6rem);
-}
+/* ============================================================
+   Products — photo cards
+   ============================================================ */
 
-.shop-card p {
-  color: var(--text-dim);
-}
-
-.shop-card .btn {
-  margin-top: auto;
-}
-
-/* ---- category grid ---- */
-
-.cats {
+.photo-cards {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: .85rem;
 }
 
-.cat {
+.photo-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: .6rem;
   min-width: 0;
-  padding: 1.15rem .75rem;
-  text-align: center;
+  overflow: hidden;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform .15s ease, box-shadow .15s ease;
 }
 
-.cat-icon {
+.photo-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lift);
+}
+
+.photo-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: var(--surface-2);
+  border-bottom: 3px solid var(--sign-gold);
+}
+
+.photo-card figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  padding: .8rem .85rem 1rem;
+}
+
+.photo-card h3 {
+  font-size: 1rem;
+  letter-spacing: -.005em;
+}
+
+.photo-card .brands {
+  font-size: .8rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+/* ============================================================
+   Rice wall
+   ============================================================ */
+
+.split {
   display: grid;
-  place-content: center;
-  width: 52px;
-  height: 52px;
-  flex: none;
-  background: var(--accent-wash);
-  border-radius: 50%;
-  color: var(--accent);
+  gap: 2rem;
 }
 
-.cat-icon svg {
-  width: 28px;
-  height: 28px;
+.rice-groups {
+  display: grid;
+  gap: .7rem;
 }
 
-.cat .bi {
+.rice-group {
+  display: grid;
+  align-content: start;
+  gap: .45rem;
+  padding: .9rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--sign-gold);
+  border-radius: var(--radius);
+}
+
+.rice-group h3 {
+  font-size: 1rem;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .6rem;
+}
+
+.photo-grid img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: var(--radius);
+  background: var(--surface-2);
+}
+
+.photo-grid--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.note {
+  margin-top: 1.25rem;
+  font-size: .9rem;
+  color: var(--muted);
+}
+
+/* ---- chips ---- */
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+}
+
+.chip {
+  display: inline-flex;
   align-items: center;
+  min-height: 34px;
+  padding: .25rem .8rem;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: .88rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.chip--accent {
+  background: var(--accent-wash);
+  border-color: transparent;
+  color: var(--accent-strong);
+}
+
+.chips--center {
+  justify-content: center;
+}
+
+.chips--lg .chip {
+  min-height: 42px;
+  padding: .4rem 1.05rem;
+  font-family: var(--display);
   font-size: .95rem;
+  font-weight: 800;
+  background: var(--surface);
+}
+
+/* ============================================================
+   Frozen foods
+   ============================================================ */
+
+.signboard {
+  overflow: hidden;
+  margin-bottom: .6rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+.signboard img {
+  width: 100%;
+}
+
+.ticks {
+  display: grid;
+  gap: .5rem;
+  margin-top: 1.2rem;
+}
+
+.ticks li {
+  display: flex;
+  align-items: flex-start;
+  gap: .6rem;
+}
+
+.ticks li::before {
+  content: "\2713";
+  flex: none;
+  color: var(--accent);
   font-weight: 700;
 }
 
-/* ---- for businesses ---- */
+.sub-head {
+  margin: 1.5rem 0 .6rem;
+  font-size: .78rem;
+  font-family: var(--sans);
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ============================================================
+   For businesses
+   ============================================================ */
 
 .biz {
   padding: 1.6rem 1.25rem;
@@ -785,7 +1039,7 @@ button {
 }
 
 .biz h2 {
-  font-size: clamp(1.3rem, 5vw, 1.7rem);
+  font-size: clamp(1.35rem, 5vw, 1.9rem);
 }
 
 .biz-lead {
@@ -793,27 +1047,130 @@ button {
   color: var(--text-dim);
 }
 
-.biz-list {
+.steps {
   display: grid;
-  gap: .5rem;
-  margin: 1.2rem 0 0;
+  gap: .85rem;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
 }
 
-.biz-list li {
-  display: flex;
-  align-items: flex-start;
+.step {
+  position: relative;
+  padding: 1rem 1rem 1rem 3.6rem;
+  background: var(--bg-soft);
+  border-radius: var(--radius);
+  counter-increment: step;
+}
+
+.step::before {
+  content: counter(step);
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  display: grid;
+  place-content: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  background: var(--sign-wall);
+  color: var(--sign-gold);
+  font-family: var(--display);
+  font-weight: 800;
+}
+
+.step h3 {
+  font-size: 1rem;
+  margin-bottom: .2rem;
+}
+
+.step p {
+  color: var(--text-dim);
+  font-size: .95rem;
+}
+
+/* ============================================================
+   Gallery + lightbox
+   ============================================================ */
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: .6rem;
-  font-weight: 400;
 }
 
-.biz-list li::before {
-  content: "\2713";
-  flex: none;
-  color: var(--accent);
-  font-weight: 700;
+.gallery li {
+  min-width: 0;
 }
 
-/* ---- visit us ---- */
+.gallery a {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius);
+}
+
+.gallery img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  background: var(--surface);
+  transition: transform .3s ease;
+}
+
+.gallery a:hover img {
+  transform: scale(1.04);
+}
+
+.lightbox {
+  width: min(94vw, 560px);
+  max-height: 94vh;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: var(--sign-wall);
+  color: var(--sign-ink);
+  overflow: hidden;
+}
+
+.lightbox::backdrop {
+  background: rgba(10, 8, 6, .85);
+}
+
+.lightbox img {
+  width: 100%;
+  max-height: 82vh;
+  object-fit: contain;
+}
+
+.lightbox p {
+  margin: 0;
+  padding: .7rem 1rem;
+  font-size: .9rem;
+  color: var(--sign-dim);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+  display: grid;
+  place-content: center;
+  width: var(--tap);
+  height: var(--tap);
+  padding: 0;
+  background: rgba(0, 0, 0, .6);
+  border: 0;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* ============================================================
+   Visit us
+   ============================================================ */
 
 .visit {
   display: grid;
@@ -920,12 +1277,21 @@ td {
   color: var(--text-dim);
 }
 
-/* ---- footer ---- */
+/* ============================================================
+   Footer — back to the sign wall
+   ============================================================ */
 
 .site-footer {
-  padding-block: 2.5rem;
-  background: var(--bg-soft);
-  border-top: 1px solid var(--line);
+  padding-block: 2.75rem;
+  background: var(--sign-wall);
+  color: var(--sign-dim);
+  border-top: 3px solid var(--sign-gold);
+}
+
+.footer-brand {
+  margin-bottom: 2rem;
+  color: var(--sign-ink);
+  font-size: 1.15rem;
 }
 
 .footer-grid {
@@ -934,11 +1300,12 @@ td {
 }
 
 .footer-col h2 {
+  font-family: var(--sans);
   font-size: .78rem;
   font-weight: 700;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--sign-gold);
   margin-bottom: .75rem;
 }
 
@@ -952,24 +1319,33 @@ td {
   align-items: center;
   gap: .5rem;
   min-height: 44px;
+  color: var(--sign-ink);
   font-weight: 700;
   text-decoration: none;
 }
 
 .footer-links a:hover {
+  color: var(--sign-gold);
   text-decoration: underline;
+}
+
+.footer-links [data-placeholder] {
+  border: 0 !important;
+  background: none !important;
+  color: var(--sign-dim) !important;
 }
 
 .legal {
   display: grid;
   gap: .3rem;
+  margin: 0;
   font-size: .9rem;
-  color: var(--text-dim);
 }
 
 .legal dt {
   font-weight: 700;
-  color: var(--muted);
+  color: var(--sign-dim);
+  opacity: .75;
   font-size: .76rem;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -977,14 +1353,14 @@ td {
 
 .legal dd {
   margin: 0 0 .6rem;
+  color: var(--sign-ink);
 }
 
 .copyright {
   margin-top: 2rem;
   padding-top: 1.25rem;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(255, 255, 255, .12);
   font-size: .88rem;
-  color: var(--muted);
 }
 
 /* ---- sticky action bar (mobile) ---- */
@@ -1015,52 +1391,12 @@ td {
   padding-bottom: calc(var(--tap) + 2.25rem);
 }
 
-/* ---- 404 ---- */
-
-.notfound {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  min-height: 70vh;
-  padding: 2rem 1.15rem;
-  text-align: center;
-}
-
-.notfound h1 {
-  font-size: clamp(2rem, 9vw, 3.25rem);
-}
-
-/* ---- photo gallery ---- */
-
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: .6rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.gallery li {
-  min-width: 0;
-}
-
-.gallery img {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  background: var(--surface);
-  border-radius: var(--radius);
-}
-
 /* ============================================================
    Wider screens
    ============================================================ */
 
 @media (min-width: 600px) {
-  .cats {
+  .photo-cards {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
@@ -1069,17 +1405,21 @@ td {
     gap: .85rem;
   }
 
+  .features {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .btn-stack {
     flex-direction: row;
     flex-wrap: wrap;
   }
 
   .btn-stack .btn {
-    flex: 1 1 15rem;
-  }
-
-  .chooser {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    flex: 1 1 13rem;
   }
 
   .footer-grid {
@@ -1089,7 +1429,7 @@ td {
 
 @media (min-width: 900px) {
   :root {
-    --header-h: 68px;
+    --header-h: 72px;
   }
 
   body {
@@ -1097,10 +1437,56 @@ td {
   }
 
   .section {
-    padding-block: 4.5rem;
+    padding-block: 5rem;
   }
 
-  .cats {
+  .hero {
+    padding-block: 4rem 4.5rem;
+  }
+
+  .hero-inner {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 3.5rem;
+  }
+
+  .mosaic {
+    gap: .9rem;
+  }
+
+  .mosaic img:nth-child(2) {
+    margin-top: 3rem;
+  }
+
+  .mosaic img:nth-child(3) {
+    margin-top: 1.25rem;
+  }
+
+  .about {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 3.5rem;
+  }
+
+  .photo-cards {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.1rem;
+  }
+
+  .split {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+    gap: 3rem;
+  }
+
+  .split--reverse > :first-child {
+    order: 2;
+  }
+
+  .rice-groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gallery {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
@@ -1114,38 +1500,13 @@ td {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  .hero {
-    padding-block: 3rem 4rem;
-  }
-
-  .hero-inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    align-items: center;
-    gap: 3rem;
-  }
-
-  .hero-media {
-    order: 2;
-    margin-bottom: 0;
-  }
-
-  .hero-text {
-    order: 1;
-  }
-
   .biz {
-    padding: 2.5rem 2.25rem;
-  }
-
-  .chooser {
-    gap: 2rem;
-    padding-block: 3rem 4.5rem;
+    padding: 2.75rem 2.5rem;
   }
 }
 
 /* Above the mobile breakpoint the sticky bar is unnecessary —
-   the header CTA and the hero buttons are both in reach. */
+   the hero buttons are in reach. */
 
 @media (min-width: 721px) {
   .actionbar {
@@ -1157,9 +1518,10 @@ td {
   }
 }
 
-/* The hamburger only exists while the nav is collapsed. */
+/* The hamburger only exists while the nav is collapsed. Seven links need
+   more room than a tablet has, so the inline nav waits for 1080px. */
 
-@media (min-width: 721px) {
+@media (min-width: 1080px) {
   .nav-toggle {
     display: none;
   }
@@ -1175,7 +1537,7 @@ td {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: .35rem;
+    gap: .15rem;
     padding: 0;
     background: none;
     border: 0;
@@ -1189,19 +1551,14 @@ td {
 
   .nav a {
     min-height: 40px;
-    padding: .35rem .7rem;
+    padding: .35rem .65rem;
     border-bottom: 0;
     border-radius: var(--radius);
-    font-size: .95rem;
+    font-size: .93rem;
   }
 
   .nav a:hover {
-    background: var(--accent-wash);
-  }
-
-  .nav .btn {
-    min-height: 42px;
-    margin-left: .35rem;
+    background: rgba(255, 255, 255, .08);
   }
 }
 
@@ -1228,11 +1585,18 @@ td {
   .nav,
   .actionbar,
   .map,
-  .skip {
+  .skip,
+  .gallery {
     display: none !important;
   }
 
   body {
+    background: #fff;
+    color: #000;
+  }
+
+  .hero,
+  .site-footer {
     background: #fff;
     color: #000;
   }

@@ -31,7 +31,7 @@ except ImportError:                                  # Python 2 fallback
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 
-PAGES = ["index.html", "supermarket/index.html", "big-bazaar/index.html"]
+PAGES = ["index.html", "big-bazaar/index.html"]
 PLAIN = ["sitemap.xml", "robots.txt"]
 NOT_FOUND = "404.html"
 

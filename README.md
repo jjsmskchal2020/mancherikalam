@@ -1,7 +1,7 @@
 # MancherikalaM BigBazar — shop website
 
 The website for **MancherikalaM BigBazar**, the family's wholesale and retail store in
-Karukachal, Kottayam district, Kerala: rice by the sack, oils, flour, spices, frozen foods,
+Changanassery, Kottayam district, Kerala: rice by the sack, oils, flour, spices, frozen foods,
 household and hygiene goods, for homes, caterers, hotels and events.
 
 Plain HTML, CSS and vanilla JavaScript. No framework, no npm, no tracking, no cookies. The
@@ -58,7 +58,7 @@ from a GitHub repository variable of the same name.
 |---|---|---|
 | `BB_PHONE` | As you want it displayed | `+91 98765 43210` |
 | `BB_WHATSAPP` | 10-digit mobile; `+91`, spaces and dashes are tidied | `9876543210` |
-| `BB_STREET_ADDRESS` | Street line only — Karukachal, Kottayam, Kerala are added | `Main Road, near the junction` |
+| `BB_STREET_ADDRESS` | Street line only — Changanassery, Kottayam, Kerala are added | `Main Road, near the junction` |
 | `BB_PINCODE` | 6 digits | `686540` |
 | `BB_HOURS_MON_SAT` | 24-hour `HH:MM-HH:MM`, or `closed` | `08:30-20:00` |
 | `BB_HOURS_SUN` | Same | `closed` |
